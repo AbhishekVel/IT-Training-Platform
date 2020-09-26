@@ -1,28 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { Stitch, UserApiKeyCredential } from "mongodb-stitch-browser-sdk";
+import React, { useState, useEffect, Text } from "react";
+import * as Realm from "realm-web";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import Loader from "react-loader-spinner";
-import Listings from "./listings/Listings";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Home from "./home/Home";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    backgroundColor: "#f7f7f9",
+    flexDirection: "column",
+    minHeight: "100vh",
+  },
+  content: {
+    padding: "20px",
+    flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+  },
+  footerContainer: {
+    borderTopWidth: "1px",
+    borderTopStyle: "solid",
+    borderTopColor: "#e6eaea",
+    width: "100%",
+    padding: "20px",
+  },
+}));
+
+const app = new Realm.App({ id: process.env.REACT_APP_MONGO_DB_APP_ID });
 
 export default function App() {
-  const [client, setClient] = useState(null);
+  const [user, setUser] = useState(null);
+  const classes = useStyles();
+
   useEffect(() => {
-    const stitchAppClient = Stitch.initializeDefaultAppClient(
-      process.env.REACT_APP_MONGO_DB_APP_ID
-    );
-    const credential = new UserApiKeyCredential(
+    const credentials = Realm.Credentials.apiKey(
       process.env.REACT_APP_MONGO_DB_API_KEY
     );
-    stitchAppClient.auth
-      .loginWithCredential(credential)
-      .then((authedId) => {
-        setClient(stitchAppClient);
-      })
-      .catch((err) => console.error(`login failed with error: ${err}`));
+    app
+      .logIn(credentials)
+      .then((user) => setUser(user))
+      .catch((err) => console.log(err));
   }, []);
 
-  if (!client) {
+  if (!user) {
     return (
       <Loader
         className="_webpageLoading"
@@ -36,9 +58,11 @@ export default function App() {
   }
 
   return (
-    <Router>
-      <div>
-        <nav>
+    <div className={classes.container}>
+      <CssBaseline />
+      <div className={classes.content}>
+        <Router>
+          {/* <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -50,31 +74,24 @@ export default function App() {
               <Link to="/users">Users</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
-        {/* A <Switch> looks through its children <Route>s and
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+            <Route path="/">
+              <Home user={user} />
+            </Route>
+          </Switch>
+        </Router>
       </div>
-    </Router>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-      <Listings />
+      <Footer />
     </div>
   );
 }
@@ -85,4 +102,10 @@ function About() {
 
 function Users() {
   return <h2>Users</h2>;
+}
+
+function Footer() {
+  const classes = useStyles();
+
+  return <div className={classes.footerContainer}>Placeholder footer</div>;
 }
