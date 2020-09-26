@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -39,23 +39,26 @@ export default function Listings({ user }) {
   // const results = user.functions.searchListings({ courseName: "a" });
   // console.log(results);
 
-  const coursesData = fakeListingObject;
+  const [coursesDataPaginated, setCoursesDataPaginated] = useState([]);
+  const [currentPage, setCurrentPage] = useState([1]);
 
-  // Doing client sided pagination for now, but would need to switch
-  const maxListingsPerPage = 5;
-  var coursesDataPaginated = [];
-  for (
-    var start = 0;
-    start < coursesData.length / maxListingsPerPage + 1;
-    start += maxListingsPerPage
-  ) {
-    coursesDataPaginated.push(
-      coursesData.slice(start, start + maxListingsPerPage)
-    );
-  }
+  useEffect(() => {
+    const coursesData = fakeListingObject;
 
-  console.log("helo");
-  console.log(coursesDataPaginated);
+    // Doing client sided pagination for now, but would need to switch
+    const maxListingsPerPage = 5;
+    var tempCoursesDataPaginated = [];
+
+    const paginatedLength =
+      Math.trunc(coursesData.length / maxListingsPerPage) + 1;
+    for (var i = 0; i < paginatedLength; i += 1) {
+      tempCoursesDataPaginated.push(
+        coursesData.slice(i * maxListingsPerPage, (i + 1) * maxListingsPerPage)
+      );
+    }
+    setCoursesDataPaginated(tempCoursesDataPaginated);
+    console.log(tempCoursesDataPaginated);
+  }, []);
 
   return (
     <React.Fragment>
@@ -71,21 +74,24 @@ export default function Listings({ user }) {
           </Paper>
         </div>
         <List component="nav" aria-label="main mailbox folders">
-          {fakeListingObject.map((listing, index) => {
-            // TODO: Will have to change the last on page when thinking about pagination
-            return (
-              <Listing
-                key={listing.id}
-                data={listing}
-                lastOnPage={index === fakeListingObject.length - 1}
-              />
-            );
-          })}
+          {coursesDataPaginated &&
+            coursesDataPaginated[currentPage - 1] &&
+            coursesDataPaginated[currentPage - 1].map((listing, index) => {
+              // TODO: Will have to change the last on page when thinking about pagination
+              return (
+                <Listing
+                  key={listing.id}
+                  data={listing}
+                  lastOnPage={index === fakeListingObject.length - 1}
+                />
+              );
+            })}
         </List>
         <Pagination
           count={coursesDataPaginated.length}
           variant="outlined"
           color="primary"
+          onChange={(event, pageNumber) => setCurrentPage(pageNumber)}
         />
       </Container>
     </React.Fragment>
