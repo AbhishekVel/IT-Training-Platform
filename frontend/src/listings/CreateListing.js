@@ -14,6 +14,7 @@ export default function CreateListing({ user }) {
   const [registrationLink, setRegistrationLink] = useState("");
   const [courseLink, setCourseLink] = useState("");
   const [teacherLink, setTeacherLink] = useState("");
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,6 +46,17 @@ export default function CreateListing({ user }) {
       fontWeight: "bold",
       fontFamily: "Courier New",
     },
+
+    submitText: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignContent: "center",
+      alignItems: "center",
+      fontWeight: "bold",
+      fontFamily: "Courier New",
+      color: "red",
+    },
   }));
 
   function Header() {
@@ -65,13 +77,27 @@ export default function CreateListing({ user }) {
       teacherLink: teacherLink,
     };
     user.functions.insertListing(objToSend);
-    console.log(objToSend);
+    setTeacherName("");
+    setCompanyName("");
+    setCourseLink("");
+    setDescription("");
+    setDateTime("");
+    setRegistrationLink("");
+    setTeacherLink("");
+    setCourseName("");
+    setFormSubmitted(true);
   }
 
   const classes = useStyles();
   return (
     <div>
       <Header />
+      {formSubmitted && (
+        <p className={classes.submitText}>
+          Thanks for submitting the listing! Please add another if you would
+          like to.
+        </p>
+      )}
       <form onSubmit={handleSubmit}>
         <FormControl className={classes.root}>
           <TextField
@@ -82,6 +108,7 @@ export default function CreateListing({ user }) {
             value={teacherName}
             onInput={(e) => {
               setTeacherName(e.target.value);
+              setFormSubmitted(false);
             }}
           />
           <TextField
@@ -105,6 +132,7 @@ export default function CreateListing({ user }) {
             }}
           />
           <TextField
+            required
             id="datetime-local"
             label="Course date and time"
             type="datetime-local"
@@ -147,7 +175,7 @@ export default function CreateListing({ user }) {
             }}
           />
           <TextField
-            label="Instructor Link"
+            label="Teacher Link [i.e. LinkedIn, GitHub, ...]"
             type="text"
             variant="outlined"
             value={teacherLink}
