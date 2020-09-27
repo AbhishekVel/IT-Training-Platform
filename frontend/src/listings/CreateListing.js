@@ -37,12 +37,19 @@ export default function CreateListing({ user }) {
     headerContainer: {
       width: "100%",
       padding: "20px",
+      display: "flex",
+      justifyContent: "center",
+      alignContent: "center",
+      alignItems: "center",
+      fontSize: "40px",
+      fontWeight: "bold",
+      fontFamily: "Courier New",
     },
   }));
 
   function Header() {
     const classes = useStyles();
-    return <div className={classes.headerContainer}>Placeholder header</div>;
+    return <div className={classes.headerContainer}>Add New Listing</div>;
   }
 
   function handleSubmit(event) {
