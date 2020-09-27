@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Listings from "./../listings/Listings";
-import homeImage from "./rsz_homeimage2.jpg";
+import homeImage from "./homeimage.png";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 
@@ -11,21 +11,42 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     flexDirection: "column",
   },
-  homeImageStyle: {
-    width: "1280px",
+  topSection: {
     height: "450px",
-    backgroundSize: "100% 100%",
+    width: "100%",
+    display: "flex",
+  },
+  informationSection: {
+    display: "flex",
+    backgroundImage: "url(" + homeImage + ")",
+    // alignSelf: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100% auto",
+    maxHeight: "450px",
+    maxWidth: "1280px",
     borderRadius: "20px",
+    flex: 1,
+    backgroundPosition: "0% 100%",
+  },
+  textSection: {
+    // width: "600px",
+    // height: "300px",
+    marginLeft: "5%",
   },
   title: {
     fontWeight: "bold",
-    fontSize: "30px",
+    fontSize: "33px",
     margin: "10px",
+    fontFamily: "Palatino",
   },
   subtitle: {
+    margin: "10px",
     color: "#525151",
-    fontSize: "20px",
-    fontFamily: "Courier New",
+    fontSize: "26px",
+    marginBottom: "2px",
+    marginTop: "2px",
+    fontSize: "22px",
+    fontFamily: "Palatino",
   },
 }));
 
@@ -33,18 +54,20 @@ export default function Home({ user }) {
   const classes = useStyles();
   return (
     <Container className={classes.container}>
-      <div>
-        <Typography className={classes.title} variant="h1">
-          Find the Top Courses for Software Training
-        </Typography>
+      <div className={classes.topSection}>
+        <div className={classes.informationSection}>
+          <div className={classes.textSection}>
+            <Typography className={classes.title} variant="h1">
+              Find the Top Courses for Software Training
+            </Typography>
+
+            <Typography className={classes.subtitle} variant="h3">
+              Browse through hundreds of courses from the top professional
+              training institutes in Hyderabad.
+            </Typography>
+          </div>
+        </div>
       </div>
-      <div>
-        <Typography className={classes.subtitle} variant="h3">
-          Browse through hundreds of courses from the top professional training
-          institutes in Hyderabad.
-        </Typography>
-      </div>
-      <img src={homeImage} className={classes.homeImageStyle}></img>
       <Listings user={user} />
     </Container>
   );

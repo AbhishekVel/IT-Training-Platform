@@ -6,17 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
-  courseImage: {
-    borderRadius: "15px",
-    marginRight: "15px",
-  },
-  divider: {
-    margin: "10px 2px",
-  },
   container: {
     display: "flex",
-    margin: "10px 2px",
-    padding: "5px 2px",
+    margin: ".5% .1%",
+    padding: ".25% .1%",
     flexDirection: "row",
     width: "100%",
   },
@@ -29,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   leftSideCourseDetails: {
     display: "flex",
     flexDirection: "column",
+    flex: 1,
   },
   rightSideCourseDetails: {
     display: "flex",
@@ -60,20 +54,29 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 0,
     color: "#303030",
   },
+  courseImage: {
+    maxWidth: "150px",
+    maxHeight: "100px",
+    width: "100%",
+    height: "auto",
+    borderRadius: "15px",
+    marginRight: "3%",
+  },
 }));
 
-export default function Listing({ data, lastOnPage }) {
+export default function Listing({ data, shaded }) {
   const classes = useStyles();
   return (
-    <ListItem button>
-      <div
-        onClick={() => alert("hello from world")}
-        className={classes.container}
-      >
+    <ListItem
+      button
+      // This adds a slight tint to every other bar -- just though it'd add a bit of hazazzz
+      style={shaded ? { backgroundColor: "#F7F5F5" } : undefined}
+    >
+      <div className={classes.container}>
         <img
           src={data.courseImageUrl || defaultImage}
-          width={150}
-          height={100}
+          // width={150}
+          // height={100}
           className={classes.courseImage}
           alt="course avatar"
         />
@@ -84,7 +87,7 @@ export default function Listing({ data, lastOnPage }) {
             <p className={classes.courseTeacher}>{data.teacherName}</p>
             {/* Change this demo time to format properly + maybe we should
         make it so they just list all of the demo timings, and clicking on it 
-    will show list of demo times + can link on it to register for that time */}
+      will show list of demo times + can link on it to register for that time */}
             <Typography className={classes.courseDemoDate}>
               <Link href={data.demoRegistrationLink}>
                 Demo Time: {new Date(data.demoDate).toLocaleString()}
@@ -97,7 +100,6 @@ export default function Listing({ data, lastOnPage }) {
           </div>
         </div>
       </div>
-      {!lastOnPage && <hr className={classes.divider} />}
     </ListItem>
   );
 }

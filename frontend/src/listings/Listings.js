@@ -38,8 +38,6 @@ export default function Listings({ user }) {
     fetchCoursesData();
   }, []);
 
-  console.log(coursesDataPaginated);
-
   return (
     <React.Fragment>
       <Container maxWidth="lg" className={classes.container}>
@@ -48,7 +46,6 @@ export default function Listings({ user }) {
             <InputBase
               className={classes.input}
               placeholder="Search course demos (ex. java)"
-              // inputProps={{ "aria-label": "search google maps" }}
             />
             <SearchIcon color="primary" />
           </Paper>
@@ -57,13 +54,8 @@ export default function Listings({ user }) {
           {coursesDataPaginated &&
             coursesDataPaginated[currentPage - 1] &&
             coursesDataPaginated[currentPage - 1].map((listing, index) => {
-              // TODO: Will have to change the last on page when thinking about pagination
               return (
-                <Listing
-                  key={listing._id}
-                  data={listing}
-                  lastOnPage={index === fakeListingObject.length - 1}
-                />
+                <Listing key={listing._id} data={listing} shaded={index % 2} />
               );
             })}
         </List>
