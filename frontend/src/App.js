@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     borderTopColor: "#e6eaea",
     width: "100%",
     padding: "20px",
+    color: "#525151",
   },
 }));
 
@@ -108,5 +109,9 @@ function Users() {
 function Footer() {
   const classes = useStyles();
 
-  return <div className={classes.footerContainer}>Placeholder footer</div>;
+  return (
+    <div className={classes.footerContainer}>
+      © 2020 ItSwami Inc. All rights reserved.{" "}
+    </div>
+  );
 }
