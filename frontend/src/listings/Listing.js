@@ -18,11 +18,13 @@ const useStyles = makeStyles((theme) => ({
     margin: "10px 2px",
     padding: "5px 2px",
     flexDirection: "row",
+    width: "100%",
   },
   courseDetails: {
     flexDirection: "row",
     display: "flex",
     flex: 1,
+    width: "100%",
   },
   leftSideCourseDetails: {
     display: "flex",
@@ -51,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
   courseDemoDate: {
     marginTop: "auto",
     marginBottom: 0,
+    fontSize: "14px",
   },
   companyName: {
     marginTop: "auto",
@@ -82,10 +85,9 @@ export default function Listing({ data, lastOnPage }) {
             {/* Change this demo time to format properly + maybe we should
         make it so they just list all of the demo timings, and clicking on it 
     will show list of demo times + can link on it to register for that time */}
-            <p className={classes.courseDemoDate}>Demo Time:</p>
-            <Typography>
+            <Typography className={classes.courseDemoDate}>
               <Link href={data.demoRegistrationLink}>
-                Demo: {data.demoDate.toLocaleString()}
+                Demo Time: {new Date(data.demoDate).toLocaleString()}
               </Link>
             </Typography>
           </div>
