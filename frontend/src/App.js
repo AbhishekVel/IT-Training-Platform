@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Text } from "react";
 import * as Realm from "realm-web";
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Loader from "react-loader-spinner";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from "./home/Home";
+import CreateListing from "./listings/CreateListing";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     borderTopColor: "#e6eaea",
     width: "100%",
     padding: "20px",
-    color: "#525151",
   },
 }));
 
@@ -81,11 +80,8 @@ export default function App() {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/users">
-              <Users />
+            <Route path="/createListing">
+              <CreateListing user={user}></CreateListing>
             </Route>
             <Route path="/">
               <Home user={user} />
@@ -98,20 +94,8 @@ export default function App() {
   );
 }
 
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
-
 function Footer() {
   const classes = useStyles();
 
-  return (
-    <div className={classes.footerContainer}>
-      © 2020 ItSwami Inc. All rights reserved.{" "}
-    </div>
-  );
+  return <div className={classes.footerContainer}>Placeholder footer</div>;
 }
