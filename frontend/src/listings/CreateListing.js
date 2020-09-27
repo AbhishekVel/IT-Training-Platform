@@ -113,7 +113,7 @@ export default function CreateListing({ user }) {
           />
           <TextField
             required
-            label="Course Name"
+            label="Demo Course Name"
             type="text"
             variant="outlined"
             value={courseName}

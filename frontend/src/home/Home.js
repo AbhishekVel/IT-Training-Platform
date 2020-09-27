@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Listings from "./../listings/Listings";
 import homeImage from "./rsz_homeimage2.jpg";
 import Container from "@material-ui/core/Container";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -10,29 +11,21 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     flexDirection: "column",
   },
-  informationSection: {
-    display: "flex",
-    backgroundImage: "url(" + homeImage + ")",
-    alignSelf: "center",
+  homeImageStyle: {
     width: "1280px",
     height: "450px",
     backgroundSize: "100% 100%",
     borderRadius: "20px",
   },
-  textSection: {
-    width: "600px",
-    height: "300px",
-    marginTop: "-10px",
-    marginLeft: "50px",
-  },
   title: {
+    fontWeight: "bold",
     fontSize: "30px",
+    margin: "10px",
   },
   subtitle: {
     color: "#525151",
-    fontSize: "23px",
-    marginBottom: "2px",
-    marginTop: "2px",
+    fontSize: "20px",
+    fontFamily: "Courier New",
   },
 }));
 
@@ -40,17 +33,18 @@ export default function Home({ user }) {
   const classes = useStyles();
   return (
     <Container className={classes.container}>
-      <div className={classes.informationSection}>
-        <div className={classes.textSection}>
-          <h1 className={classes.title}>
-            Find the Top Courses for Software Training
-          </h1>
-          <p className={classes.subtitle}>
-            Browse through hundreds of courses from the top professional
-            training institutes in Hyderabad.
-          </p>
-        </div>
+      <div>
+        <Typography className={classes.title} variant="h1">
+          Find the Top Courses for Software Training
+        </Typography>
       </div>
+      <div>
+        <Typography className={classes.subtitle} variant="h3">
+          Browse through hundreds of courses from the top professional training
+          institutes in Hyderabad.
+        </Typography>
+      </div>
+      <img src={homeImage} className={classes.homeImageStyle}></img>
       <Listings user={user} />
     </Container>
   );
