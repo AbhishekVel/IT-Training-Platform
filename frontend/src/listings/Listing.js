@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import defaultImage from "./defaultcourseimg.jpg"; // Tell webpack this JS file uses this image
 import ListItem from "@material-ui/core/ListItem";
+import Typography from "@material-ui/core/Typography";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   courseImage: {
@@ -80,9 +82,12 @@ export default function Listing({ data, lastOnPage }) {
             {/* Change this demo time to format properly + maybe we should
         make it so they just list all of the demo timings, and clicking on it 
     will show list of demo times + can link on it to register for that time */}
-            <p className={classes.courseDemoDate}>
-              Demo Time: {data.demoDate.toLocaleString()}
-            </p>
+            <p className={classes.courseDemoDate}>Demo Time:</p>
+            <Typography>
+              <Link href={data.demoRegistrationLink}>
+                Demo: {data.demoDate.toLocaleString()}
+              </Link>
+            </Typography>
           </div>
 
           <div className={classes.rightSideCourseDetails}>

@@ -8,6 +8,78 @@ import List from "@material-ui/core/List";
 import Pagination from "@material-ui/lab/Pagination";
 import SearchIcon from "@material-ui/icons/Search";
 
+const MAX_LISTINGS_PER_PAGE = 5;
+
+export default function Listings({ user }) {
+  const classes = useStyles();
+  // const results = user.functions.searchListings({ courseName: "a" });
+
+  const [coursesDataPaginated, setCoursesDataPaginated] = useState([]);
+  const [currentPage, setCurrentPage] = useState([1]);
+
+  useEffect(() => {
+    async function fetchCoursesData() {
+      const fetchDataResults = await user.functions.getAllListings();
+      const coursesData = fetchDataResults.results;
+      var tempCoursesDataPaginated = [];
+      const paginatedLength =
+        Math.trunc(coursesData.length / MAX_LISTINGS_PER_PAGE) + 1;
+      for (var i = 0; i < paginatedLength; i += 1) {
+        tempCoursesDataPaginated.push(
+          coursesData.slice(
+            i * MAX_LISTINGS_PER_PAGE,
+            (i + 1) * MAX_LISTINGS_PER_PAGE
+          )
+        );
+      }
+      setCoursesDataPaginated(tempCoursesDataPaginated);
+    }
+
+    fetchCoursesData();
+  }, []);
+
+  console.log(coursesDataPaginated);
+
+  return (
+    <React.Fragment>
+      <Container maxWidth="lg" className={classes.container}>
+        <div className={classes.searchBar}>
+          <Paper component="form" className={classes.searchField}>
+            <InputBase
+              className={classes.input}
+              placeholder="Search course demos (ex. java)"
+              // inputProps={{ "aria-label": "search google maps" }}
+            />
+            <SearchIcon color="primary" />
+          </Paper>
+        </div>
+        <List component="nav" aria-label="main mailbox folders">
+          {coursesDataPaginated &&
+            coursesDataPaginated[currentPage - 1] &&
+            coursesDataPaginated[currentPage - 1].map((listing, index) => {
+              // TODO: Will have to change the last on page when thinking about pagination
+              return (
+                <Listing
+                  key={listing._id}
+                  data={listing}
+                  lastOnPage={index === fakeListingObject.length - 1}
+                />
+              );
+            })}
+        </List>
+        <div className={classes.pagination}>
+          <Pagination
+            count={coursesDataPaginated.length}
+            variant="outlined"
+            color="primary"
+            onChange={(event, pageNumber) => setCurrentPage(pageNumber)}
+          />
+        </div>
+      </Container>
+    </React.Fragment>
+  );
+}
+
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
@@ -32,71 +104,10 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     height: "50px",
   },
+  pagination: {
+    alignSelf: "center",
+  },
 }));
-
-export default function Listings({ user }) {
-  const classes = useStyles();
-  // const results = user.functions.searchListings({ courseName: "a" });
-  // console.log(results);
-
-  const [coursesDataPaginated, setCoursesDataPaginated] = useState([]);
-  const [currentPage, setCurrentPage] = useState([1]);
-
-  useEffect(() => {
-    const coursesData = fakeListingObject;
-
-    // Doing client sided pagination for now, but would need to switch
-    const maxListingsPerPage = 5;
-    var tempCoursesDataPaginated = [];
-
-    const paginatedLength =
-      Math.trunc(coursesData.length / maxListingsPerPage) + 1;
-    for (var i = 0; i < paginatedLength; i += 1) {
-      tempCoursesDataPaginated.push(
-        coursesData.slice(i * maxListingsPerPage, (i + 1) * maxListingsPerPage)
-      );
-    }
-    setCoursesDataPaginated(tempCoursesDataPaginated);
-    console.log(tempCoursesDataPaginated);
-  }, []);
-
-  return (
-    <React.Fragment>
-      <Container maxWidth="lg" className={classes.container}>
-        <div className={classes.searchBar}>
-          <Paper component="form" className={classes.searchField}>
-            <InputBase
-              className={classes.input}
-              placeholder="Search course demos (ex. java)"
-              // inputProps={{ "aria-label": "search google maps" }}
-            />
-            <SearchIcon color="primary" />
-          </Paper>
-        </div>
-        <List component="nav" aria-label="main mailbox folders">
-          {coursesDataPaginated &&
-            coursesDataPaginated[currentPage - 1] &&
-            coursesDataPaginated[currentPage - 1].map((listing, index) => {
-              // TODO: Will have to change the last on page when thinking about pagination
-              return (
-                <Listing
-                  key={listing.id}
-                  data={listing}
-                  lastOnPage={index === fakeListingObject.length - 1}
-                />
-              );
-            })}
-        </List>
-        <Pagination
-          count={coursesDataPaginated.length}
-          variant="outlined"
-          color="primary"
-          onChange={(event, pageNumber) => setCurrentPage(pageNumber)}
-        />
-      </Container>
-    </React.Fragment>
-  );
-}
 
 const fakeListingObject = [
   {
