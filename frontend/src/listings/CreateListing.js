@@ -1,198 +1,234 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import { useState } from "react";
 
-export default function CreateListing({ user }) {
-  const [teacherName, setTeacherName] = useState("");
-  const [description, setDescription] = useState("");
-  const [courseName, setCourseName] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [dateTime, setDateTime] = useState("");
-  const [registrationLink, setRegistrationLink] = useState("");
-  const [courseLink, setCourseLink] = useState("");
-  const [teacherLink, setTeacherLink] = useState("");
-  const [formSubmitted, setFormSubmitted] = useState(false);
+// function Header() {
+//   const headerContainer = {
+//     fontSize: "40px",
+//     fontWeight: "bold",
+//     fontFamily: "Courier New",
+//   };
+//   return <div>Add New Listing</div>;
+// }
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "75ch",
-      },
-      display: "flex",
-      justifyContent: "center",
-      alignContent: "center",
-      alignItems: "center",
-    },
-    headerTitle: {
-      display: "contents",
-      paddingTop: "10ch",
-    },
-    submitButton: {
-      width: "75ch",
-      height: "7ch",
-    },
-    headerContainer: {
-      width: "100%",
-      padding: "20px",
-      display: "flex",
-      justifyContent: "center",
-      alignContent: "center",
-      alignItems: "center",
-      fontSize: "40px",
-      fontWeight: "bold",
-      fontFamily: "Courier New",
-    },
+class CreateListing extends React.Component {
+  state = {
+    listings: [{ date: "", link: "" }],
+    teacherName: "",
+    courseName: "",
+    description: "",
+    companyName: "",
+    teacherLink: "",
+    courseLink: "",
+  };
 
-    submitText: {
-      width: "100%",
-      display: "flex",
-      justifyContent: "center",
-      alignContent: "center",
-      alignItems: "center",
-      fontWeight: "bold",
-      fontFamily: "Courier New",
-      color: "red",
-    },
-  }));
+  handleChange = (e) => {
+    if (["date", "link"].includes(e.target.className)) {
+      let listings = [...this.state.listings];
+      listings[e.target.dataset.id][e.target.className] = e.target.value;
+      this.setState({ listings });
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
+  };
 
-  function Header() {
-    const classes = useStyles();
-    return <div className={classes.headerContainer}>Add New Listing</div>;
-  }
+  addListing = (e) => {
+    this.setState((prevState) => ({
+      listings: [...prevState.listings, { date: "", link: "" }],
+    }));
+  };
 
-  function handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     let objToSend = {
-      courseName: courseName,
-      description: description,
-      teacherName: teacherName,
-      companyName: companyName,
-      demoDate: dateTime,
-      demoRegistrationLink: registrationLink,
-      courseOverviewLink: courseLink,
-      teacherLink: teacherLink,
+      courseName: this.state.courseName,
+      description: this.state.description,
+      teacherName: this.state.teacherName,
+      companyName: this.state.companyName,
+      courseOverviewLink: this.state.courseLink,
+      teacherLink: this.state.teacherLink,
+      listings: this.state.listings,
     };
-    user.functions.insertListing(objToSend);
-    setTeacherName("");
-    setCompanyName("");
-    setCourseLink("");
-    setDescription("");
-    setDateTime("");
-    setRegistrationLink("");
-    setTeacherLink("");
-    setCourseName("");
-    setFormSubmitted(true);
-  }
+    console.log(objToSend);
+    // user.functions.insertListing(objToSend);
+  };
 
-  const classes = useStyles();
-  return (
-    <div>
-      <Header />
-      {formSubmitted && (
+  render() {
+    const root = {
+      display: "flex",
+      justifyContent: "center",
+    };
+
+    const textField = {
+      width: "75ch",
+      height: "7ch",
+      margin: "5px",
+    };
+
+    const submitButton = {
+      width: "70ch",
+      height: "7ch",
+      margin: "5px",
+    };
+
+    const dateButton = {
+      width: "69.5ch",
+      height: "7ch",
+      margin: "5px",
+    };
+
+    //   const submitText =  {
+    //     width: "100%",
+    //     display: "flex",
+    //     justifyContent: "center",
+    //     alignContent: "center",
+    //     alignItems: "center",
+    //     fontWeight: "bold",
+    //     fontFamily: "Courier New",
+    //     color: "red",
+    //   },
+
+    let {
+      teacherName,
+      courseName,
+      description,
+      companyName,
+      teacherLink,
+      courseLink,
+      listings,
+    } = this.state;
+
+    return (
+      <div style={root}>
+        {/* <Header></Header> */}
+        {/* {formSubmitted && (
         <p className={classes.submitText}>
-          Thanks for submitting the listing! Please add another if you would
-          like to.
+          Thanks for submitting the listing! 
         </p>
-      )}
-      <form onSubmit={handleSubmit}>
-        <FormControl className={classes.root}>
-          <TextField
-            required
-            label="Teacher Name"
-            type="text"
-            variant="outlined"
-            value={teacherName}
-            onInput={(e) => {
-              setTeacherName(e.target.value);
-              setFormSubmitted(false);
-            }}
-          />
-          <TextField
-            required
-            label="Demo Course Name"
-            type="text"
-            variant="outlined"
-            value={courseName}
-            onInput={(e) => {
-              setCourseName(e.target.value);
-            }}
-          />
-          <TextField
-            required
-            label="Description"
-            type="text"
-            variant="outlined"
-            value={description}
-            onInput={(e) => {
-              setDescription(e.target.value);
-            }}
-          />
-          <TextField
-            required
-            id="datetime-local"
-            label="Course date and time"
-            type="datetime-local"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onInput={(e) => {
-              setDateTime(e.target.value);
-            }}
-            value={dateTime}
-          />
-          <TextField
-            required
-            label="Company Name"
-            type="text"
-            variant="outlined"
-            value={companyName}
-            onInput={(e) => {
-              setCompanyName(e.target.value);
-            }}
-          />
-          <TextField
-            required
-            label="Demo Registration Link"
-            type="text"
-            variant="outlined"
-            value={registrationLink}
-            onInput={(e) => {
-              setRegistrationLink(e.target.value);
-            }}
-          />
-          <TextField
-            label="Course Overview Link"
-            type="text"
-            variant="outlined"
-            value={courseLink}
-            onInput={(e) => {
-              setCourseLink(e.target.value);
-            }}
-          />
-          <TextField
-            label="Teacher Link [i.e. LinkedIn, GitHub, ...]"
-            type="text"
-            variant="outlined"
-            value={teacherLink}
-            onInput={(e) => {
-              setTeacherLink(e.target.value);
-            }}
-          />
-          <Button
-            className={classes.submitButton}
-            variant="contained"
-            color="primary"
-            type="submit"
-          >
-            Submit
-          </Button>
-        </FormControl>
-      </form>
-    </div>
-  );
+      )} */}
+        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+          <FormControl>
+            <input
+              style={textField}
+              required
+              type="text"
+              variant="outlined"
+              name="teacherName"
+              id="teacherName"
+              value={teacherName}
+              placeholder="Teacher Name"
+            />
+            <input
+              style={textField}
+              required
+              label="Demo Course Name"
+              type="text"
+              variant="outlined"
+              name="courseName"
+              id="courseName"
+              value={courseName}
+              placeholder="Demo Course Name"
+            />
+            <input
+              style={textField}
+              required
+              label="Description"
+              type="text"
+              variant="outlined"
+              name="description"
+              id="description"
+              value={description}
+              placeholder="Description"
+            />
+            <input
+              style={textField}
+              required
+              label="Company Name"
+              type="text"
+              variant="outlined"
+              id="companyName"
+              name="companyName"
+              value={companyName}
+              placeholder="Company Name"
+            />
+            <input
+              style={textField}
+              label="Course Overview Link (optional)"
+              type="text"
+              variant="outlined"
+              value={courseLink}
+              id="courseLink"
+              name="courseLink"
+              placeholder="Demo Course Overview Link (optional)"
+            />
+            <input
+              style={textField}
+              label="Teacher Link [i.e. LinkedIn, GitHub, ...] (optional)"
+              type="text"
+              variant="outlined"
+              id="teacherLink"
+              name="teacherLink"
+              value={teacherLink}
+              placeholder="Teacher Link [i.e. LinkedIn, GitHub, ...] (optional) "
+            />
+            {listings.map((val, idx) => {
+              let dateId = `date-${idx}`,
+                linkId = `link-${idx}`;
+              return (
+                <div key={idx}>
+                  <div>
+                    <input
+                      style={dateButton}
+                      className="date"
+                      id={dateId}
+                      data-id={idx}
+                      label="Course date and time"
+                      type="datetime-local"
+                      variant="outlined"
+                      name={dateId}
+                      value={listings[idx].date}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      style={textField}
+                      label="Demo Registration Link"
+                      type="text"
+                      variant="outlined"
+                      name={linkId}
+                      data-id={idx}
+                      id={linkId}
+                      className="link"
+                      value={listings[idx].link}
+                      placeholder="Demo Registration Link"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+            <Button
+              style={submitButton}
+              variant="contained"
+              color="primary"
+              type="submit"
+              onClick={this.addListing}
+            >
+              Add demo link and time
+            </Button>
+            <Button
+              style={submitButton}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
+              Submit
+            </Button>
+          </FormControl>
+        </form>
+      </div>
+    );
+  }
 }
+
+export default CreateListing;
