@@ -71,7 +71,7 @@ export default function CreateListing({ user }) {
       description: description,
       teacherName: teacherName,
       companyName: companyName,
-      demoDate: dateTime,
+      demoDate: new Date(dateTime),
       demoRegistrationLink: registrationLink,
       courseOverviewLink: courseLink,
       teacherLink: teacherLink,

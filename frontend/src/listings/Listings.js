@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     marginTop: "40px",
     marginBottom: "10px",
-    marginLeft: "23px",
+    // marginLeft: "23px",
   },
   searchField: {
     padding: "2px 4px",
