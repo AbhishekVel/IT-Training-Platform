@@ -12,27 +12,47 @@ const MAX_LISTINGS_PER_PAGE = 5;
 
 export default function Listings({ user }) {
   const classes = useStyles();
-  // const results = user.functions.searchListings({ courseName: "a" });
 
   const [coursesDataPaginated, setCoursesDataPaginated] = useState([]);
   const [currentPage, setCurrentPage] = useState([1]);
+
+  function setStateFromRawCoursesData(coursesData) {
+    var tempCoursesDataPaginated = [];
+    const paginatedLength =
+      Math.trunc(coursesData.length / MAX_LISTINGS_PER_PAGE) + 1;
+    for (var i = 0; i < paginatedLength; i += 1) {
+      tempCoursesDataPaginated.push(
+        coursesData.slice(
+          i * MAX_LISTINGS_PER_PAGE,
+          (i + 1) * MAX_LISTINGS_PER_PAGE
+        )
+      );
+    }
+    setCoursesDataPaginated(tempCoursesDataPaginated);
+  }
+
+  function setSearchValue(event) {
+    async function getSearchResults(searchString) {
+      // Todo this is pretty ineficient, can locally cache results for specific queries instead of recomputing every time
+      var results;
+      if (searchString.length === 0) {
+        results = (await user.functions.getAllListings()).results;
+      } else {
+        results = await user.functions.searchListings({
+          searchTerm: searchString,
+        });
+      }
+      setStateFromRawCoursesData(results);
+    }
+
+    getSearchResults(event.target.value);
+  }
 
   useEffect(() => {
     async function fetchCoursesData() {
       const fetchDataResults = await user.functions.getAllListings();
       const coursesData = fetchDataResults.results;
-      var tempCoursesDataPaginated = [];
-      const paginatedLength =
-        Math.trunc(coursesData.length / MAX_LISTINGS_PER_PAGE) + 1;
-      for (var i = 0; i < paginatedLength; i += 1) {
-        tempCoursesDataPaginated.push(
-          coursesData.slice(
-            i * MAX_LISTINGS_PER_PAGE,
-            (i + 1) * MAX_LISTINGS_PER_PAGE
-          )
-        );
-      }
-      setCoursesDataPaginated(tempCoursesDataPaginated);
+      setStateFromRawCoursesData(coursesData);
     }
 
     fetchCoursesData();
@@ -46,6 +66,7 @@ export default function Listings({ user }) {
             <InputBase
               className={classes.input}
               placeholder="Search course demos (ex. java)"
+              onChange={setSearchValue}
             />
             <SearchIcon color="primary" />
           </Paper>
