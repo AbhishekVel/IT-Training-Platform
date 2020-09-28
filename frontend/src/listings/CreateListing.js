@@ -55,7 +55,7 @@ export default function CreateListing({ user }) {
       alignItems: "center",
       fontWeight: "bold",
       fontFamily: "Courier New",
-      color: "red",
+      color: "green",
     },
   }));
 
