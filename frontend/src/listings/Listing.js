@@ -4,6 +4,8 @@ import defaultImage from "./defaultcourseimg.jpg"; // Tell webpack this JS file 
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+import Collapse from "@material-ui/core/Collapse";
+import List from "@material-ui/core/List";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -23,11 +25,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     flex: 1,
+    width: "90%",
   },
   rightSideCourseDetails: {
     display: "flex",
     marginLeft: "auto",
     flexDirection: "column",
+    width: "10%",
   },
   courseName: {
     marginTop: 0,
@@ -52,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   companyName: {
     marginTop: "auto",
     marginBottom: 0,
+    width: "100%",
     color: "#303030",
   },
   courseImage: {
@@ -62,44 +67,78 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "15px",
     marginRight: "3%",
   },
+  courseDemoListings: {},
 }));
 
 export default function Listing({ data, shaded }) {
   const classes = useStyles();
-  return (
-    <ListItem
-      button
-      // This adds a slight tint to every other bar -- just though it'd add a bit of hazazzz
-      style={shaded ? { backgroundColor: "#F7F5F5" } : undefined}
-    >
-      <div className={classes.container}>
-        <img
-          src={data.courseImageUrl || defaultImage}
-          // width={150}
-          // height={100}
-          className={classes.courseImage}
-          alt="course avatar"
-        />
-        <div className={classes.courseDetails}>
-          <div className={classes.leftSideCourseDetails}>
-            <b className={classes.courseName}>{data.courseName}</b>
-            <p className={classes.courseDescription}>{data.description}</p>
-            <p className={classes.courseTeacher}>{data.teacherName}</p>
-            {/* Change this demo time to format properly + maybe we should
-        make it so they just list all of the demo timings, and clicking on it 
-      will show list of demo times + can link on it to register for that time */}
-            <Typography className={classes.courseDemoDate}>
-              <Link href={data.demoRegistrationLink}>
-                Demo Time: {new Date(data.demoDate).toLocaleString()}
-              </Link>
-            </Typography>
-          </div>
+  const [open, setOpen] = React.useState(false);
 
-          <div className={classes.rightSideCourseDetails}>
-            <p className={classes.companyName}>{data.companyName}</p>
+  return (
+    <div>
+      <ListItem
+        onClick={() => setOpen(!open)}
+        button
+        // This adds a slight tint to every other bar -- just though it'd add a bit of hazazzz
+        style={shaded ? { backgroundColor: "#F7F5F5" } : undefined}
+      >
+        <div className={classes.container}>
+          {/*// This looks sorta ugly right now, maybe if users cant figure out how to expand the list item, we can put this back
+           {open ? (
+            <ExpandLess
+              style={{
+                alignSelf: "center",
+                justifySelf: "center",
+                marginRight: "1%",
+              }}
+            />
+          ) : (
+            <ExpandMore
+              style={{
+                alignSelf: "center",
+                justifySelf: "center",
+                marginRight: "1%",
+              }}
+            />
+          )} */}
+          <img
+            src={data.courseImageUrl || defaultImage}
+            // width={150}
+            // height={100}
+            className={classes.courseImage}
+            alt="course avatar"
+          />
+          <div className={classes.courseDetails}>
+            <div className={classes.leftSideCourseDetails}>
+              <b className={classes.courseName}>{data.courseName}</b>
+              <p className={classes.courseDescription}>{data.description}</p>
+              <p className={classes.courseTeacher}>{data.teacherName}</p>
+            </div>
+
+            <div className={classes.rightSideCourseDetails}>
+              <p className={classes.companyName}>{data.companyName}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </ListItem>
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <div className={classes.courseDemoListings}>
+            <Typography className={classes.courseDemoDate}>
+              {data.listings &&
+                data.listings.map((demoInfo, index) => {
+                  return (
+                    <ListItem className={classes.demoDateListItem} key={index}>
+                      <Link href={demoInfo.link}>
+                        {new Date(demoInfo.date).toLocaleString()}
+                      </Link>
+                    </ListItem>
+                  );
+                })}
+            </Typography>
+          </div>
+        </List>
+      </Collapse>
+    </div>
   );
 }
