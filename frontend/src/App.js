@@ -1,11 +1,12 @@
-import React, { useState, useEffect, Text } from "react";
+import React, { useState, useEffect } from "react";
 import * as Realm from "realm-web";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Loader from "react-loader-spinner";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from "./home/Home";
 import CreateListing from "./listings/CreateListing";
+import tinyDegreesLogo from "./tinydegreeslogo.png";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,11 +22,21 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   footerContainer: {
+    display: "flex",
     borderTopWidth: "1px",
     borderTopStyle: "solid",
     borderTopColor: "#e6eaea",
     width: "100%",
     padding: "20px",
+    color: "#303030",
+    flexDirection: "row",
+  },
+  footerCopyright: {
+    paddingTop: "30px",
+    marginLeft: "auto",
+  },
+  footerLogo: {
+    marginRight: "auto",
   },
 }));
 
@@ -97,5 +108,15 @@ export default function App() {
 function Footer() {
   const classes = useStyles();
 
-  return <div className={classes.footerContainer}>Placeholder footer</div>;
+  return (
+    <div className={classes.footerContainer}>
+      <div className={classes.footerLogo}>
+        <img src={tinyDegreesLogo} width={100} height={100} />
+      </div>
+
+      <div className={classes.footerCopyright}>
+        <p>© 2020 TinyDegrees Inc. All rights reserved.</p>
+      </div>
+    </div>
+  );
 }

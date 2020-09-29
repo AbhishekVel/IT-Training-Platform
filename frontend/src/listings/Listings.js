@@ -8,7 +8,7 @@ import List from "@material-ui/core/List";
 import Pagination from "@material-ui/lab/Pagination";
 import SearchIcon from "@material-ui/icons/Search";
 
-const MAX_LISTINGS_PER_PAGE = 5;
+const MAX_LISTINGS_PER_PAGE = 10;
 
 export default function Listings({ user }) {
   const classes = useStyles();
