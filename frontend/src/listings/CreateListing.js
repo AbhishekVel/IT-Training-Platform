@@ -24,6 +24,10 @@ class CreateListing extends React.Component {
     teacherLink: "",
     courseLink: "",
     formSubmitted: false,
+    correctAccessToken: "",
+    accessToken: "",
+    displayTokenPage: true,
+    incorrectAccessToken: false,
   };
 
   handleChange = (e) => {
@@ -72,6 +76,41 @@ class CreateListing extends React.Component {
     this.props.user.functions.insertListing(objToSend);
   };
 
+  handleTokenChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleTokenSubmit = (e) => {
+    e.preventDefault();
+    const listOfAccessTokens = [
+      "67538",
+      "40033",
+      "22029",
+      "75949",
+      "15386",
+      "96836",
+      "44762",
+      "33852",
+      "43975",
+      "63168",
+      "44275",
+      "34463",
+      "51804",
+      "90850",
+      "18224",
+      "35518",
+      "26754",
+      "10904",
+      "24081",
+      "95630",
+    ];
+    if (listOfAccessTokens.includes(this.state.accessToken)) {
+      this.setState({ correctAccessToken: true, displayTokenPage: false });
+    } else {
+      this.setState({ incorrectAccessToken: true });
+    }
+  };
+
   render() {
     const root = {
       display: "flex",
@@ -107,6 +146,23 @@ class CreateListing extends React.Component {
       color: "green",
     };
 
+    const accessTokenText = {
+      display: "flex",
+      justifyContent: "center",
+      fontWeight: "bold",
+      fontFamily: "Palantino",
+      fontSize: "20px",
+    };
+
+    const incorrectAccessTokenText = {
+      display: "flex",
+      justifyContent: "center",
+      fontWeight: "bold",
+      fontFamily: "Palantino",
+      fontSize: "20px",
+      color: "red",
+    };
+
     const demoNumberLabel = {
       display: "flex",
       justifyContent: "center",
@@ -122,149 +178,191 @@ class CreateListing extends React.Component {
       teacherLink,
       courseLink,
       listings,
+      accessToken,
     } = this.state;
 
     return (
       <div>
-        <div>
-          <Header></Header>
-        </div>
-        <div>
-          {this.state.formSubmitted && (
-            <p style={submitText}>
-              Thanks for submitting the listing! Submit another one if you would
-              like to!
-            </p>
-          )}
-        </div>
-        <div style={root}>
-          <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+        {this.state.displayTokenPage && (
+          <div style={root}>
             <FormControl>
+              <p style={accessTokenText}>
+                Please enter the access token provided to you, to be able to add
+                a listing.
+              </p>
+              {this.state.incorrectAccessToken && (
+                <p style={incorrectAccessTokenText}>
+                  Incorrect Access Token, please try again!
+                </p>
+              )}
               <input
                 style={textField}
                 required
                 type="text"
                 variant="outlined"
-                name="teacherName"
-                id="teacherName"
-                value={teacherName}
-                placeholder="Teacher Name"
+                name="accessToken"
+                id="accessToken"
+                value={accessToken}
+                placeholder="Access Token"
+                onChange={this.handleTokenChange}
               />
-              <input
-                style={textField}
-                required
-                label="Demo Course Name"
-                type="text"
-                variant="outlined"
-                name="courseName"
-                id="courseName"
-                value={courseName}
-                placeholder="Demo Course Name"
-              />
-              <input
-                style={textField}
-                required
-                label="Description"
-                type="text"
-                variant="outlined"
-                name="description"
-                id="description"
-                value={description}
-                placeholder="Description"
-              />
-              <input
-                style={textField}
-                required
-                label="Company Name"
-                type="text"
-                variant="outlined"
-                id="companyName"
-                name="companyName"
-                value={companyName}
-                placeholder="Company Name"
-              />
-              <input
-                style={textField}
-                label="Course Overview Link (optional)"
-                type="text"
-                variant="outlined"
-                value={courseLink}
-                id="courseLink"
-                name="courseLink"
-                placeholder="Demo Course Overview Link (optional)"
-              />
-              <input
-                style={textField}
-                label="Teacher Link [i.e. LinkedIn, GitHub, ...] (optional)"
-                type="text"
-                variant="outlined"
-                id="teacherLink"
-                name="teacherLink"
-                value={teacherLink}
-                placeholder="Teacher Link [i.e. LinkedIn, GitHub, ...] (optional) "
-              />
-              {listings.map((val, idx) => {
-                let dateId = `date-${idx}`,
-                  linkId = `link-${idx}`;
-                return (
-                  <div key={idx}>
-                    <div>
-                      <div>
-                        <label
-                          style={demoNumberLabel}
-                          htmlFor={linkId}
-                        >{`Demo #${idx + 1}`}</label>
-                      </div>
-                      <div>
-                        <input
-                          required
-                          style={textField}
-                          label="Demo Registration Link"
-                          type="text"
-                          variant="outlined"
-                          name={linkId}
-                          data-id={idx}
-                          id={linkId}
-                          className="link"
-                          value={listings[idx].link}
-                          placeholder="Demo Registration Link"
-                        />
-                      </div>
-                      <input
-                        required
-                        style={dateButton}
-                        className="date"
-                        id={dateId}
-                        data-id={idx}
-                        label="Course date and time"
-                        type="datetime-local"
-                        variant="outlined"
-                        name={dateId}
-                        value={listings[idx].date}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
-              <Button
-                style={submitButton}
-                variant="contained"
-                color="primary"
-                onClick={this.addListing}
-              >
-                Add demo link and time
-              </Button>
-              <Button
-                style={submitButton}
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
+              <div>
+                <Button
+                  style={submitButton}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  onClick={this.handleTokenSubmit}
+                >
+                  Submit
+                </Button>
+              </div>
             </FormControl>
-          </form>
-        </div>
+          </div>
+        )}
+        {this.state.correctAccessToken && (
+          <div>
+            <div>
+              <Header></Header>
+            </div>
+            <div>
+              {this.state.formSubmitted && (
+                <p style={submitText}>
+                  Thanks for submitting the listing! Submit another one if you
+                  would like to!
+                </p>
+              )}
+            </div>
+            <div style={root}>
+              <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+                <FormControl>
+                  <input
+                    style={textField}
+                    required
+                    type="text"
+                    variant="outlined"
+                    name="teacherName"
+                    id="teacherName"
+                    value={teacherName}
+                    placeholder="Teacher Name"
+                  />
+                  <input
+                    style={textField}
+                    required
+                    label="Demo Course Name"
+                    type="text"
+                    variant="outlined"
+                    name="courseName"
+                    id="courseName"
+                    value={courseName}
+                    placeholder="Demo Course Name"
+                  />
+                  <input
+                    style={textField}
+                    required
+                    label="Description"
+                    type="text"
+                    variant="outlined"
+                    name="description"
+                    id="description"
+                    value={description}
+                    placeholder="Description"
+                  />
+                  <input
+                    style={textField}
+                    required
+                    label="Company Name"
+                    type="text"
+                    variant="outlined"
+                    id="companyName"
+                    name="companyName"
+                    value={companyName}
+                    placeholder="Company Name"
+                  />
+                  <input
+                    style={textField}
+                    label="Course Overview Link (optional)"
+                    type="text"
+                    variant="outlined"
+                    value={courseLink}
+                    id="courseLink"
+                    name="courseLink"
+                    placeholder="Demo Course Overview Link (optional)"
+                  />
+                  <input
+                    style={textField}
+                    label="Teacher Link [i.e. LinkedIn, GitHub, ...] (optional)"
+                    type="text"
+                    variant="outlined"
+                    id="teacherLink"
+                    name="teacherLink"
+                    value={teacherLink}
+                    placeholder="Teacher Link [i.e. LinkedIn, GitHub, ...] (optional) "
+                  />
+                  {listings.map((val, idx) => {
+                    let dateId = `date-${idx}`,
+                      linkId = `link-${idx}`;
+                    return (
+                      <div key={idx}>
+                        <div>
+                          <div>
+                            <label
+                              style={demoNumberLabel}
+                              htmlFor={linkId}
+                            >{`Demo #${idx + 1}`}</label>
+                          </div>
+                          <div>
+                            <input
+                              required
+                              style={textField}
+                              label="Demo Registration Link"
+                              type="text"
+                              variant="outlined"
+                              name={linkId}
+                              data-id={idx}
+                              id={linkId}
+                              className="link"
+                              value={listings[idx].link}
+                              placeholder="Demo Registration Link"
+                            />
+                          </div>
+                          <input
+                            required
+                            style={dateButton}
+                            className="date"
+                            id={dateId}
+                            data-id={idx}
+                            label="Course date and time"
+                            type="datetime-local"
+                            variant="outlined"
+                            name={dateId}
+                            value={listings[idx].date}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <Button
+                    style={submitButton}
+                    variant="contained"
+                    color="primary"
+                    onClick={this.addListing}
+                  >
+                    Add demo link and time
+                  </Button>
+                  <Button
+                    style={submitButton}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </FormControl>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
