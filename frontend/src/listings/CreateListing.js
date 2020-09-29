@@ -45,6 +45,11 @@ class CreateListing extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    this.state.listings.forEach(function (listing) {
+      listing.date = new Date(listing.date);
+    });
+
     let objToSend = {
       courseName: this.state.courseName,
       description: this.state.description,
@@ -64,8 +69,7 @@ class CreateListing extends React.Component {
       courseLink: "",
       formSubmitted: true,
     });
-    console.log(objToSend);
-    // user.functions.insertListing(objToSend);
+    this.props.user.functions.insertListing(objToSend);
   };
 
   render() {
@@ -78,18 +82,21 @@ class CreateListing extends React.Component {
       width: "75ch",
       height: "7ch",
       margin: "5px",
+      font: "Palantino",
     };
 
     const submitButton = {
       width: "70ch",
       height: "7ch",
       margin: "5px",
+      font: "Palantino",
     };
 
     const dateButton = {
       width: "69.5ch",
       height: "7ch",
       margin: "5px",
+      font: "Palantino",
     };
 
     const submitText = {
@@ -98,6 +105,13 @@ class CreateListing extends React.Component {
       fontWeight: "bold",
       fontFamily: "Palantino",
       color: "green",
+    };
+
+    const demoNumberLabel = {
+      display: "flex",
+      justifyContent: "center",
+      fontWeight: "bold",
+      fontFamily: "Palantino",
     };
 
     let {
@@ -195,7 +209,29 @@ class CreateListing extends React.Component {
                 return (
                   <div key={idx}>
                     <div>
+                      <div>
+                        <label
+                          style={demoNumberLabel}
+                          htmlFor={linkId}
+                        >{`Demo #${idx + 1}`}</label>
+                      </div>
+                      <div>
+                        <input
+                          required
+                          style={textField}
+                          label="Demo Registration Link"
+                          type="text"
+                          variant="outlined"
+                          name={linkId}
+                          data-id={idx}
+                          id={linkId}
+                          className="link"
+                          value={listings[idx].link}
+                          placeholder="Demo Registration Link"
+                        />
+                      </div>
                       <input
+                        required
                         style={dateButton}
                         className="date"
                         id={dateId}
@@ -205,20 +241,6 @@ class CreateListing extends React.Component {
                         variant="outlined"
                         name={dateId}
                         value={listings[idx].date}
-                      />
-                    </div>
-                    <div>
-                      <input
-                        style={textField}
-                        label="Demo Registration Link"
-                        type="text"
-                        variant="outlined"
-                        name={linkId}
-                        data-id={idx}
-                        id={linkId}
-                        className="link"
-                        value={listings[idx].link}
-                        placeholder="Demo Registration Link"
                       />
                     </div>
                   </div>
