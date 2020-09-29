@@ -18,8 +18,9 @@ export default function Listings({ user }) {
 
   function setStateFromRawCoursesData(coursesData) {
     var tempCoursesDataPaginated = [];
-    const paginatedLength =
-      Math.trunc(coursesData.length / MAX_LISTINGS_PER_PAGE) + 1;
+    const paginatedLength = Math.ceil(
+      coursesData.length / MAX_LISTINGS_PER_PAGE
+    );
     for (var i = 0; i < paginatedLength; i += 1) {
       tempCoursesDataPaginated.push(
         coursesData.slice(
@@ -44,7 +45,7 @@ export default function Listings({ user }) {
       }
       setStateFromRawCoursesData(results);
     }
-
+    setCurrentPage(1);
     getSearchResults(event.target.value);
   }
 
