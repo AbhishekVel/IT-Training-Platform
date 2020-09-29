@@ -29,15 +29,16 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     padding: "20px",
     color: "#303030",
-    flexDirection: "row",
+    flexDirection: "column",
+    alignItems: "center",
   },
-  footerCopyright: {
-    paddingTop: "30px",
-    marginLeft: "auto",
-  },
-  footerLogo: {
-    marginRight: "auto",
-  },
+  // footerCopyright: {
+  //   paddingTop: "30px",
+  //   marginLeft: "auto",
+  // },
+  // footerLogo: {
+  //   marginRight: "auto",
+  // },
 }));
 
 const app = new Realm.App({ id: process.env.REACT_APP_MONGO_DB_APP_ID });
@@ -110,13 +111,15 @@ function Footer() {
 
   return (
     <div className={classes.footerContainer}>
-      <div className={classes.footerLogo}>
-        <img src={tinyDegreesLogo} width={100} height={100} />
-      </div>
-
-      <div className={classes.footerCopyright}>
-        <p>© 2020 TinyDegrees Inc. All rights reserved.</p>
-      </div>
+      <img
+        style={{ marginBottom: 0, paddingBottom: 0 }}
+        src={tinyDegreesLogo}
+        width={100}
+        height={100}
+      />
+      <p style={{ marginTop: 0 }}>
+        © 2020 TinyDegrees Inc. All rights reserved.
+      </p>
     </div>
   );
 }
