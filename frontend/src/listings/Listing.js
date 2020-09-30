@@ -29,26 +29,24 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     flex: 1,
-    width: "90%",
   },
   rightSideCourseDetails: {
     display: "flex",
     marginLeft: "auto",
     flexDirection: "column",
-    width: "10%",
   },
   courseName: {
     marginTop: 0,
     marginBottom: 0,
-    fontSize: "18px",
+    fontSize: "1rem",
   },
   courseDescription: {
     marginTop: "2px",
     marginBottom: 0,
-    fontSize: "16px",
+    fontSize: ".95rem",
   },
   courseTeacher: {
-    fontSize: "13px",
+    fontSize: ".9rem",
     marginTop: "1px",
     color: "#303030",
   },
@@ -57,14 +55,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 0,
     width: "100%",
     color: "#303030",
-  },
-  courseImage: {
-    maxWidth: "150px",
-    maxHeight: "100px",
-    width: "100%",
-    height: "auto",
-    borderRadius: "15px",
-    marginRight: "3%",
+    fontSize: ".9rem",
   },
   courseDemoListings: {
     flex: "display",
@@ -100,34 +91,23 @@ export default function Listing({ data, shaded }) {
         style={{
           backgroundColor: shaded ? "#F7F5F5" : undefined,
           flexDirection: "column",
-          // boxShadow: 3,
+          marginLeft: 0,
+          paddingLeft: 0,
         }}
       >
         <div className={classes.container}>
-          {/*// This looks sorta ugly right now, maybe if users cant figure out how to expand the list item, we can put this back
-           {open ? (
-             <ExpandLess
-             style={{
-               alignSelf: "center",
-               justifySelf: "center",
-               marginRight: "1%",
-              }}
-              />
-              ) : (
-                <ExpandMore
-                style={{
-                  alignSelf: "center",
-                  justifySelf: "center",
-                  marginRight: "1%",
-                }}
-                />
-              )} */}
-          <img
-            src={data.courseImageUrl || defaultImage}
-            // width={150}
-            // height={100}
-            className={classes.courseImage}
-            alt="course avatar"
+          <div
+            style={{
+              maxWidth: "18%",
+              maxHeight: "150px",
+              display: "flex",
+              marginRight: "1rem",
+              flex: 1,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "50% 50%",
+              backgroundImage: `url(${data.courseImageUrl || defaultImage})`,
+            }}
           />
           <div className={classes.courseDetails}>
             <div className={classes.leftSideCourseDetails}>
@@ -150,7 +130,13 @@ export default function Listing({ data, shaded }) {
           <List component="div" disablePadding>
             <div className={classes.courseDemoListings}>
               <ListItem>
-                <b style={{ fontSize: "15px" }}>Available Course Demos:</b>
+                <b
+                  style={{
+                    fontSize: ".9rem",
+                  }}
+                >
+                  Available Course Demos:
+                </b>
               </ListItem>
               {data.listings &&
                 data.listings.map((demoInfo, index) => {
@@ -160,7 +146,12 @@ export default function Listing({ data, shaded }) {
                         <EventIcon />
                       </ListItemIcon>
                       <Link href={demoInfo.link}>
-                        <p style={{ fontSize: "16px", margin: "0 0" }}>
+                        <p
+                          style={{
+                            fontSize: ".9rem",
+                            margin: "0 0",
+                          }}
+                        >
                           {new Date(demoInfo.date).toLocaleDateString(
                             "en-us",
                             dateFormatOptions

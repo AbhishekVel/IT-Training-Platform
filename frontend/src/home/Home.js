@@ -35,17 +35,16 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontWeight: "bold",
-    fontSize: "33px",
+    fontSize: "1.5rem",
     margin: "10px",
     fontFamily: "Palatino",
   },
   subtitle: {
     margin: "10px",
     color: "#525151",
-    fontSize: "26px",
     marginBottom: "2px",
     marginTop: "2px",
-    fontSize: "22px",
+    fontSize: "1.2rem",
     fontFamily: "Palatino",
   },
 }));
@@ -57,11 +56,11 @@ export default function Home({ user }) {
       <div className={classes.topSection}>
         <div className={classes.informationSection}>
           <div className={classes.textSection}>
-            <Typography className={classes.title} variant="h1">
+            <Typography className={classes.title}>
               Find the Top Courses for Software Training
             </Typography>
 
-            <Typography className={classes.subtitle} variant="h3">
+            <Typography className={classes.subtitle}>
               Browse through hundreds of courses from the top professional
               training institutes in Hyderabad.
             </Typography>

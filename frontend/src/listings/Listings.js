@@ -72,7 +72,7 @@ export default function Listings({ user }) {
             <SearchIcon color="primary" />
           </Paper>
         </div>
-        <List component="nav" aria-label="main mailbox folders">
+        <List>
           {coursesDataPaginated &&
             coursesDataPaginated[currentPage - 1] &&
             coursesDataPaginated[currentPage - 1].map((listing, index) => {
@@ -102,9 +102,8 @@ const useStyles = makeStyles((theme) => ({
   searchBar: {
     display: "flex",
     flexDirection: "row",
-    marginTop: "40px",
-    marginBottom: "10px",
-    // marginLeft: "23px",
+    marginTop: "3%",
+    marginBottom: "3%",
   },
   searchField: {
     padding: "2px 4px",

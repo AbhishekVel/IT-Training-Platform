@@ -9,6 +9,13 @@ import CreateListing from "./listings/CreateListing";
 import tinyDegreesLogo from "./tinydegreeslogo.png";
 
 const useStyles = makeStyles((theme) => ({
+  loaderContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    minHeight: "100vh",
+  },
   container: {
     display: "flex",
     backgroundColor: "#f7f7f9",
@@ -16,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
   },
   content: {
-    padding: "20px",
+    padding: "1%",
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
@@ -59,14 +66,16 @@ export default function App() {
 
   if (!user) {
     return (
-      <Loader
-        className="_webpageLoading"
-        type="ThreeDots"
-        color="#00BFFF"
-        height={100}
-        width={100}
-        timeout={3000} //3 secs
-      />
+      <div className={classes.loaderContainer}>
+        <Loader
+          className="_webpageLoading"
+          type="ThreeDots"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={3000} //3 secs
+        />
+      </div>
     );
   }
 
