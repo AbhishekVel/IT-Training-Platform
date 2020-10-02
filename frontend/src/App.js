@@ -6,6 +6,8 @@ import Loader from "react-loader-spinner";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from "./home/Home";
 import CreateListing from "./listings/CreateListing";
+import About from "./about/About";
+
 import tinyDegreesLogo from "./tinydegreeslogo.png";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
@@ -40,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#303030",
     flexDirection: "column",
     alignItems: "center",
+  },
+  title: {
+    flexGrow: 1,
   },
   // footerCopyright: {
   //   paddingTop: "30px",
@@ -91,7 +96,7 @@ export default function App() {
               <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
                 <img src={tinyDegreesLogo} width={80} height={70} />
               </Link>
-              <Typography variant="h6"></Typography>
+              <Typography variant="h6" className={classes.title}></Typography>
               <Button color="inherit">
                 <Link
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -112,6 +117,9 @@ export default function App() {
           </AppBar>
 
           <Switch>
+            <Route path="/about">
+              <About></About>
+            </Route>
             <Route path="/createlisting">
               <CreateListing user={user}></CreateListing>
             </Route>
