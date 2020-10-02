@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import * as Realm from "realm-web";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Loader from "react-loader-spinner";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from "./home/Home";
 import CreateListing from "./listings/CreateListing";
 import tinyDegreesLogo from "./tinydegreeslogo.png";
+import Toolbar from "@material-ui/core/Toolbar";
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   loaderContainer: {
@@ -82,24 +86,31 @@ export default function App() {
       <CssBaseline />
       <div className={classes.content}>
         <Router>
-          {/* <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav> */}
+          <AppBar position="static" color="white">
+            <Toolbar>
+              <img src={tinyDegreesLogo} width={80} height={70} />{" "}
+              <Typography variant="h6"></Typography>
+              <Button color="inherit">
+                <Link
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  to="/about"
+                >
+                  About
+                </Link>
+              </Button>
+              <Button color="inherit">
+                <Link
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  to="/feedback"
+                >
+                  Feedback
+                </Link>
+              </Button>
+            </Toolbar>
+          </AppBar>
 
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/createListing">
+            <Route path="/createlisting">
               <CreateListing user={user}></CreateListing>
             </Route>
             <Route path="/">
