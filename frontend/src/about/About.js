@@ -64,14 +64,14 @@ export default function Album() {
       <main>
         {/* Hero unit */}
         <div className={classes.aboutSection}>
-          <Container maxWidth="sm">
+          <Container maxWidth="md">
             <Typography
               className={classes.aboutUsPageFont}
               variant="h2"
               align="center"
               gutterBottom
             >
-              About Us
+              Improving the Course Searching Process
             </Typography>
             <Typography
               variant="h5"
@@ -80,9 +80,12 @@ export default function Album() {
               paragraph
               className={classes.aboutUsPageFont}
             >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
+              The cost of a software course can range between ₹5,000 and
+              ₹40,000. For many, this large sum of money can be one of the
+              biggest investments in their lives. The existing environment makes
+              it difficult to find the <i>perfect</i> course that satisfies your
+              criteria. TinyDegrees aims to make <i>course searching</i> a fun
+              and simple process.
             </Typography>
           </Container>
         </div>
