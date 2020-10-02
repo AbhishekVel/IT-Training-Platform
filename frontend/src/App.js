@@ -88,7 +88,9 @@ export default function App() {
         <Router>
           <AppBar position="static" color="white">
             <Toolbar>
-              <img src={tinyDegreesLogo} width={80} height={70} />{" "}
+              <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
+                <img src={tinyDegreesLogo} width={80} height={70} />
+              </Link>
               <Typography variant="h6"></Typography>
               <Button color="inherit">
                 <Link
