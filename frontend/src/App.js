@@ -8,6 +8,7 @@ import Home from "./home/Home";
 import CreateListing from "./listings/CreateListing";
 import About from "./about/About";
 import Feedback from "./feedback/Feedback";
+import { useMediaQuery } from "react-responsive";
 
 import tinyDegreesLogo from "./logo.png";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -59,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const app = new Realm.App({ id: process.env.REACT_APP_MONGO_DB_APP_ID });
 
 export default function App() {
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const [user, setUser] = useState(null);
   const classes = useStyles();
 
@@ -95,7 +97,10 @@ export default function App() {
           <AppBar position="static" color="white">
             <Toolbar>
               <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
-                <img src={tinyDegreesLogo} height={50} />
+                <img
+                  src={tinyDegreesLogo}
+                  height={isTabletOrMobile ? 25 : 35}
+                />
               </Link>
               <Typography variant="h6" className={classes.title}></Typography>
               <Button color="inherit">
