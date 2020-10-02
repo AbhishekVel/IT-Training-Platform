@@ -9,7 +9,7 @@ import CreateListing from "./listings/CreateListing";
 import About from "./about/About";
 import Feedback from "./feedback/Feedback";
 
-import tinyDegreesLogo from "./tinydegreeslogo.png";
+import tinyDegreesLogo from "./logo.png";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
@@ -95,7 +95,7 @@ export default function App() {
           <AppBar position="static" color="white">
             <Toolbar>
               <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
-                <img src={tinyDegreesLogo} width={80} height={70} />
+                <img src={tinyDegreesLogo} height={50} />
               </Link>
               <Typography variant="h6" className={classes.title}></Typography>
               <Button color="inherit">
@@ -146,8 +146,7 @@ function Footer() {
       <img
         style={{ marginBottom: 0, paddingBottom: 0 }}
         src={tinyDegreesLogo}
-        width={100}
-        height={100}
+        width={150}
       />
       <p style={{ marginTop: 0 }}>
         © 2020 TinyDegrees Inc. All rights reserved.
