@@ -14,7 +14,7 @@ const useStyles = (onMobile) =>
       width: "100%",
       margin: 0,
       padding: 0,
-      backgroundImage: "linear-gradient(#E3EAF7, #E3EAF7, white)",
+      backgroundImage: "linear-gradient(#E3EAF7, #E3EAF7, #F7F8FA)",
     },
     topSection: {
       height: "450px",

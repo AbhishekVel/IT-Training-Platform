@@ -39,17 +39,21 @@ const useStyles = makeStyles((theme) => ({
   courseName: {
     marginTop: 0,
     marginBottom: 0,
+    // color: "#444053",
     fontSize: "1rem",
+    fontFamily: "Palantino",
   },
   courseDescription: {
     marginTop: "2px",
     marginBottom: 0,
     fontSize: ".95rem",
+    fontFamily: "Palantino",
   },
   courseTeacher: {
     fontSize: ".9rem",
     marginTop: "1px",
     color: "#303030",
+    fontFamily: "Palantino",
   },
   companyName: {
     marginTop: "auto",
@@ -57,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     color: "#303030",
     fontSize: ".9rem",
+    fontFamily: "Palantino",
   },
   courseDemoListings: {
     flex: "display",

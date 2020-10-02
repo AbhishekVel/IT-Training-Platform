@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#F7F8FA",
+    backgroundColor: "#F6F8FC",
     borderRadius: "35px",
     paddingBottom: "10px",
   },
