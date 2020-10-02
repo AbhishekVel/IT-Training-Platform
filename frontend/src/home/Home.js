@@ -17,8 +17,7 @@ const useStyles = (onMobile) =>
       backgroundImage: "linear-gradient(#E3EAF7, #E3EAF7, #F7F8FA)",
     },
     centeredTopSection: {
-      paddingTop: "3%",
-      paddingBottom: "3%",
+      padding: theme.spacing(8, 0, 8),
       display: "flex",
       flexDirection: "row",
     },
