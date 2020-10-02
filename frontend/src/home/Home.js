@@ -4,6 +4,8 @@ import Listings from "./../listings/Listings";
 import homeImg from "./../illustrations/undraw_youtube_tutorial_2gn3.svg";
 import { Typography } from "@material-ui/core";
 import { useMediaQuery } from "react-responsive";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const useStyles = (onMobile) =>
   makeStyles((theme) => ({
@@ -12,45 +14,27 @@ const useStyles = (onMobile) =>
       flex: 1,
       flexDirection: "column",
       width: "100%",
-      margin: 0,
-      padding: 0,
       backgroundImage: "linear-gradient(#E3EAF7, #E3EAF7, #F7F8FA)",
     },
-    topSection: {
-      height: "450px",
-      width: "100%",
-      display: "flex",
-      margin: 0,
-      padding: 0,
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      paddingBottom: "2%",
-      paddingTop: "2%",
-    },
     centeredTopSection: {
+      paddingTop: "3%",
+      paddingBottom: "3%",
       display: "flex",
       flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
     },
     textSection: {
+      display: "flex",
       alignItems: "center",
       justifyContent: "center",
       flexDirection: "column",
-      margin: "20px",
-      width: onMobile ? "300px" : "600px",
-      height: onMobile ? "180px" : "300px",
     },
     title: {
       fontWeight: "bold",
-      fontSize: onMobile ? "25px" : "45px",
       fontFamily: "Palatino",
       color: "#444053",
     },
     subtitle: {
       color: "#525151",
-      fontSize: onMobile ? "20px" : "25px",
       fontFamily: "Palatino",
     },
   }));
@@ -60,26 +44,42 @@ export default function Home({ user }) {
   const classes = useStyles(isTabletOrMobile)();
 
   return (
-    <div className={classes.container}>
-      <div className={classes.topSection}>
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth="root" className={classes.container}>
         <div className={classes.centeredTopSection}>
-          <div className={classes.textSection}>
-            <Typography className={classes.title}>
+          <Container
+            maxWidth="sm"
+            disableGutters
+            className={classes.textSection}
+          >
+            <Typography
+              className={classes.title}
+              variant={isTabletOrMobile ? "h4" : "h2"}
+              align="center"
+              gutterBottom
+            >
               Find the Top Courses for Software Training
             </Typography>
-            <Typography className={classes.subtitle}>
+            <Typography
+              variant={isTabletOrMobile ? "h6" : "h5"}
+              align="center"
+              color="textSecondary"
+              paragraph
+              className={classes.subtitle}
+            >
               Browse through hundreds of courses from the top professional
               training institutes in Hyderabad.
             </Typography>
-          </div>
+          </Container>
           {isTabletOrMobile ? undefined : (
-            <div style={{ marginLeft: "7%" }}>
+            <Container maxWidth="sm" disableGutters>
               <img height={450} src={homeImg} alt="home image" />
-            </div>
+            </Container>
           )}
         </div>
-      </div>
-      <Listings user={user} />
-    </div>
+        <Listings user={user} />
+      </Container>
+    </React.Fragment>
   );
 }

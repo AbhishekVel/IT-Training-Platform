@@ -67,7 +67,6 @@ export default function Album() {
           <Container maxWidth="sm">
             <Typography
               className={classes.aboutUsPageFont}
-              component="h1"
               variant="h2"
               align="center"
               gutterBottom
@@ -91,7 +90,6 @@ export default function Album() {
           <Container className={classes.cardGrid} maxWidth="md">
             {/* End hero unit */}
             <Typography
-              component="h1"
               variant="h2"
               align="center"
               color="textPrimary"
@@ -121,7 +119,7 @@ export default function Album() {
                       After graduating from the University of Maryland, Abhishek
                       started working at Samsara as a software engineer. He
                       previously interned as an engineer at Microsoft, Facebook,
-                      J.P. Morgan.
+                      and J.P. Morgan.
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -152,7 +150,6 @@ export default function Album() {
                     <Typography
                       gutterBottom
                       variant="h5"
-                      component="h2"
                       className={classes.aboutUsPageFont}
                     >
                       Javed Akthar Shaik
@@ -160,7 +157,7 @@ export default function Album() {
                     <Typography className={classes.personDescription}>
                       After graduating from the University of Maryland, Javed
                       started working at Salesforce as a software engineer. He
-                      previously interned as an engineer at Salesforce, J.P.
+                      previously interned as an engineer at Salesforce, and J.P.
                       Morgan.
                     </Typography>
                   </CardContent>
@@ -200,7 +197,7 @@ export default function Album() {
                     <Typography className={classes.personDescription}>
                       After graduating from the University of Maryland, Puneeth
                       started working at MongoDB as a software engineer. He
-                      previously interned as an engineer at MongoDB, J.P.
+                      previously interned as an engineer at MongoDB, and J.P.
                       Morgan.
                     </Typography>
                   </CardContent>
