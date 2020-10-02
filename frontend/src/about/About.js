@@ -18,7 +18,7 @@ import javedImage from "./javed.png";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundImage: "linear-gradient(#E3EAF7, #E3EAF7, #F7F8FA)",
     padding: theme.spacing(8, 0, 6),
   },
   cardGrid: {
@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "130px",
   },
   aboutSection: {
+    backgroundImage: "linear-gradient(#E3EAF7, #E3EAF7, #F7F8FA)",
     padding: theme.spacing(8, 0, 6),
   },
   aboutUsPageFont: {
