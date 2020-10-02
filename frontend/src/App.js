@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from "./home/Home";
 import CreateListing from "./listings/CreateListing";
 import About from "./about/About";
+import Feedback from "./feedback/Feedback";
 
 import tinyDegreesLogo from "./tinydegreeslogo.png";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -117,6 +118,9 @@ export default function App() {
           </AppBar>
 
           <Switch>
+            <Route path="/feedback">
+              <Feedback></Feedback>
+            </Route>
             <Route path="/about">
               <About></About>
             </Route>
