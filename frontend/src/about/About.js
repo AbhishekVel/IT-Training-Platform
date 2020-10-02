@@ -83,9 +83,9 @@ export default function Album() {
               The cost of a software course can range between ₹5,000 and
               ₹40,000. For many, this large sum of money can be one of the
               biggest investments in their lives. The existing environment makes
-              it difficult to find the <i>perfect</i> course that satisfies your
-              criteria. TinyDegrees aims to make <i>course searching</i> a fun
-              and simple process.
+              it difficult to find the perfect course that satisfies your
+              criteria. TinyDegrees aims to make course searching a fun and
+              simple process.
             </Typography>
           </Container>
         </div>
