@@ -10,6 +10,7 @@ import Box from "@material-ui/core/Box";
 import { ListItemIcon } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
 import EventIcon from "@material-ui/icons/Event";
+import { useMediaQuery } from "react-responsive";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -72,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Listing({ data, shaded }) {
   const classes = useStyles();
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const [open, setOpen] = React.useState(false);
   var dateFormatOptions = {
     weekday: "long",

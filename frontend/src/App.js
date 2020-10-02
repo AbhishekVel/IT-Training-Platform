@@ -23,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
   },
   content: {
-    padding: "1%",
-    flexGrow: 1,
     display: "flex",
     flexDirection: "column",
   },

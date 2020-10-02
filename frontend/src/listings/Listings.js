@@ -98,6 +98,9 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
+    backgroundColor: "#F7F8FA",
+    borderRadius: "35px",
+    paddingBottom: "10px",
   },
   searchBar: {
     display: "flex",
