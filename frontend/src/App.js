@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  logo: {
+    margin: theme.spacing(0, 0, 2),
+  },
   // footerCopyright: {
   //   paddingTop: "30px",
   //   marginLeft: "auto",
@@ -148,11 +151,7 @@ function Footer() {
 
   return (
     <div className={classes.footerContainer}>
-      <img
-        style={{ marginBottom: 0, paddingBottom: 0 }}
-        src={tinyDegreesLogo}
-        width={150}
-      />
+      <img className={classes.logo} src={tinyDegreesLogo} width={150} />
       <p style={{ marginTop: 0 }}>
         © 2020 TinyDegrees Inc. All rights reserved.
       </p>
