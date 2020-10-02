@@ -58,7 +58,7 @@ export default function Home({ user }) {
               align="center"
               gutterBottom
             >
-              Find the Top Courses for Software Training
+              Find the Best Classes for Software Training
             </Typography>
             <Typography
               variant={isTabletOrMobile ? "h6" : "h5"}
@@ -67,7 +67,7 @@ export default function Home({ user }) {
               paragraph
               className={classes.subtitle}
             >
-              Browse through hundreds of courses from the top professional
+              Browse through hundreds of live classes from the top professional
               training institutes in Hyderabad.
             </Typography>
           </Container>
