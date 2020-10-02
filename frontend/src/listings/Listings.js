@@ -53,6 +53,7 @@ export default function Listings({ user }) {
     async function fetchCoursesData() {
       const fetchDataResults = await user.functions.getAllListings();
       const coursesData = fetchDataResults.results;
+      // const coursesData = fakeListingObject;
       setStateFromRawCoursesData(coursesData);
     }
 
@@ -105,8 +106,7 @@ const useStyles = makeStyles((theme) => ({
   searchBar: {
     display: "flex",
     flexDirection: "row",
-    marginTop: "3%",
-    marginBottom: "3%",
+    margin: theme.spacing(3, 2, 2, 2),
   },
   searchField: {
     padding: "2px 4px",
@@ -124,3 +124,160 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
   },
 }));
+
+const fakeListingObject = [
+  {
+    id: 123,
+    courseImageUrl: "https://img-a.udemycdn.com/course/480x270/567828_67d0.jpg",
+    courseName: "Learn Python Programming Masterclass 0",
+    // MAX OF 200 CHARACTERS
+    briefDescription:
+      "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
+    price: "6000",
+    teacherName: "John Doe",
+    companyName: "Naresh Technologies",
+    demoDate: new Date(2020, 12, 5, 13, 30),
+    demoRegistrationLink: "https://www.udemy.com/courses/development/",
+    courseOverviewLink: "https://www.udemy.com/courses/development/",
+    teacherLink: "https://www.udemy.com/courses/development/",
+    totalHours: 60,
+    totalDays: 30,
+    numberOfClicks: 0,
+  },
+  {
+    id: 124,
+    courseImageUrl: null,
+    courseName: "The Web Developer Bootcamp 1",
+    briefDescription:
+      "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
+    price: "6000",
+    teacherName: "John Doe",
+    companyName: "Naresh Technologies",
+    demoDate: new Date(2020, 12, 5, 13, 30),
+    demoRegistrationLink: "https://www.udemy.com/courses/development/",
+    courseOverviewLink: "https://www.udemy.com/courses/development/",
+    teacherLink: "https://www.udemy.com/courses/development/",
+    numberOfClicks: 0,
+    totalHours: 60,
+    totalDays: 30,
+  },
+  {
+    id: 125,
+    courseImageUrl: null,
+    courseName: "The Web Developer Bootcamp 2",
+    briefDescription:
+      "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
+    price: "12000",
+    teacherName: "John Doe",
+    companyName: "Naresh Technologies",
+    demoDate: new Date(2020, 12, 5, 13, 30),
+    demoRegistrationLink: "https://www.udemy.com/courses/development/",
+    courseOverviewLink: "https://www.udemy.com/courses/development/",
+    teacherLink: "https://www.udemy.com/courses/development/",
+    numberOfClicks: 0,
+    totalHours: 60,
+    totalDays: 30,
+  },
+  {
+    id: 126,
+    courseImageUrl: null,
+    courseName: "The Web Developer Bootcamp 3",
+    briefDescription:
+      "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
+    price: "6000",
+    teacherName: "John Doe",
+    companyName: "Naresh Technologies",
+    demoDate: new Date(2020, 12, 5, 13, 30),
+    demoRegistrationLink: "https://www.udemy.com/courses/development/",
+    courseOverviewLink: "https://www.udemy.com/courses/development/",
+    teacherLink: "https://www.udemy.com/courses/development/",
+    numberOfClicks: 0,
+    totalHours: 60,
+    totalDays: 30,
+  },
+  {
+    id: 127,
+    courseImageUrl: null,
+    courseName: "The Web Developer Bootcamp 4",
+    briefDescription:
+      "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
+    price: "8000",
+    teacherName: "John Doe",
+    companyName: "Naresh Technologies",
+    demoDate: new Date(2020, 12, 5, 13, 30),
+    demoRegistrationLink: "https://www.udemy.com/courses/development/",
+    courseOverviewLink: "https://www.udemy.com/courses/development/",
+    teacherLink: "https://www.udemy.com/courses/development/",
+    numberOfClicks: 0,
+    totalHours: 60,
+    totalDays: 30,
+  },
+  {
+    id: 128,
+    courseImageUrl: null,
+    courseName: "The Web Developer Bootcamp 5",
+    briefDescription:
+      "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
+    price: "10000",
+    teacherName: "John Doe",
+    companyName: "Naresh Technologies",
+    demoDate: new Date(2020, 12, 5, 13, 30),
+    demoRegistrationLink: "https://www.udemy.com/courses/development/",
+    courseOverviewLink: "https://www.udemy.com/courses/development/",
+    teacherLink: "https://www.udemy.com/courses/development/",
+    numberOfClicks: 0,
+    totalHours: 60,
+    totalDays: 30,
+  },
+  {
+    id: 129,
+    courseImageUrl: null,
+    courseName: "The Web Developer Bootcamp 6",
+    briefDescription:
+      "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
+    price: "12000",
+    teacherName: "John Doe",
+    companyName: "Naresh Technologies",
+    demoDate: new Date(2020, 12, 5, 13, 30),
+    demoRegistrationLink: "https://www.udemy.com/courses/development/",
+    courseOverviewLink: "https://www.udemy.com/courses/development/",
+    teacherLink: "https://www.udemy.com/courses/development/",
+    numberOfClicks: 0,
+    totalHours: 60,
+    totalDays: 30,
+  },
+  {
+    id: 130,
+    courseImageUrl: null,
+    courseName: "The Web Developer Bootcamp 7",
+    briefDescription:
+      "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
+    price: "3000",
+    teacherName: "John Doe",
+    companyName: "Naresh Technologies",
+    demoDate: new Date(2020, 12, 5, 13, 30),
+    demoRegistrationLink: "https://www.udemy.com/courses/development/",
+    courseOverviewLink: "https://www.udemy.com/courses/development/",
+    teacherLink: "https://www.udemy.com/courses/development/",
+    numberOfClicks: 0,
+    totalHours: 60,
+    totalDays: 30,
+  },
+  {
+    id: 131,
+    courseImageUrl: null,
+    courseName: "The Web Developer Bootcamp 8",
+    briefDescription:
+      "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
+    price: "15000",
+    teacherName: "John Doe",
+    companyName: "Naresh Technologies",
+    demoDate: new Date(2020, 12, 5, 13, 30),
+    demoRegistrationLink: "https://www.udemy.com/courses/development/",
+    courseOverviewLink: "https://www.udemy.com/courses/development/",
+    teacherLink: "https://www.udemy.com/courses/development/",
+    numberOfClicks: 0,
+    totalHours: 60,
+    totalDays: 30,
+  },
+];
