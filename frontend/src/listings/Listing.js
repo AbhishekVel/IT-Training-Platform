@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import { useMediaQuery } from "react-responsive";
 import Grid from "@material-ui/core/Grid";
+import { useHistory } from "react-router-dom";
 
 const useStyles = (onPhone) =>
   makeStyles((theme) => ({
@@ -55,10 +56,14 @@ const useStyles = (onPhone) =>
 export default function Listing({ data, shaded }) {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const classes = useStyles(isTabletOrMobile)();
+  const history = useHistory();
 
   return (
     <ListItem
       button
+      onClick={() => {
+        history.push(`/courses/${data._id}`);
+      }}
       style={{
         flexDirection: "column",
         padding: "1%",

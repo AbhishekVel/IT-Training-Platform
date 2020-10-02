@@ -45,7 +45,7 @@ export default function Home({ user }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="root" className={classes.container}>
+      <Container maxWidth="xl" className={classes.container}>
         <div className={classes.centeredTopSection}>
           <Container
             maxWidth="sm"

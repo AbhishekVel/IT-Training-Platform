@@ -9,6 +9,7 @@ import CreateListing from "./listings/CreateListing";
 import About from "./about/About";
 import Feedback from "./feedback/Feedback";
 import { useMediaQuery } from "react-responsive";
+import ListingPage from "./listings/ListingPage";
 
 import tinyDegreesLogo from "./logo.png";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -28,11 +29,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     backgroundColor: "#f7f7f9",
     flexDirection: "column",
-    minHeight: "100vh",
   },
   content: {
     display: "flex",
     flexDirection: "column",
+    minHeight: "88vh",
   },
   footerContainer: {
     display: "flex",
@@ -97,7 +98,7 @@ export default function App() {
       <CssBaseline />
       <div className={classes.content}>
         <Router>
-          <AppBar position="static" color="white">
+          <AppBar position="static" color="default">
             <Toolbar>
               <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
                 <img
@@ -134,6 +135,9 @@ export default function App() {
             </Route>
             <Route path="/createlisting">
               <CreateListing user={user}></CreateListing>
+            </Route>
+            <Route path="/courses/:id">
+              <ListingPage user={user} />
             </Route>
             <Route path="/">
               <Home user={user} />

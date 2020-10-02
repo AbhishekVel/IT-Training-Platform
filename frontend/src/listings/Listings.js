@@ -134,12 +134,13 @@ const fakeListingObject = [
     briefDescription:
       "This Python For Beginners Course Teaches You The Python Language Fast. Includes Python Online Training With Python 3",
     price: "6000",
-    teacherName: "John Doe",
+    teacherName: "P Kishore",
+    teacherPic: "https://nareshit.in/wp-content/uploads/2015/09/Kishore.jpg",
+    teacherBio: `Mr. Kishore P.S.S.N is a leading C, C++ and ORACLE faculty having 10+ years of experience in teaching and Software development. His main intention is to improve the students Logical, programming skills and motivate them to think the reality of software industry needs. He believes practical knowledge and hard work makes the students best programmers. Due to the real time touch he is giving the examples which are near to the real time examples and they are very much useful to the students in interviews and in their career.
+    In Kishore words “If student is perfect in C & C++, they will become good programmer in any language. Because of for all programming languages the C & C++ are the foundation stones. `,
     companyName: "Naresh Technologies",
     demoDate: new Date(2020, 12, 5, 13, 30),
-    demoRegistrationLink: "https://www.udemy.com/courses/development/",
     courseOverviewLink: "https://www.udemy.com/courses/development/",
-    teacherLink: "https://www.udemy.com/courses/development/",
     totalHours: 60,
     totalDays: 30,
     numberOfClicks: 0,
