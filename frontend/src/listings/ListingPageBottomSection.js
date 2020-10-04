@@ -10,6 +10,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import CheckIcon from "@material-ui/icons/Check";
 
+import defaultTeacherPic from "../illustrations/defaultTeacherPic.png";
+
 function renderLearnList(classes, learnList) {
   return learnList.map((learnString, idx) => {
     return (
@@ -46,7 +48,10 @@ export default function ListingPageButtomSection({ data }) {
         <Grid item container xs={12} md={6}>
           {/* teacher info */}
           <Paper className={classes.aboutTeacher}>
-            <img src={data.teacherPic} className={classes.teacherPic} />
+            <img
+              src={data.teacherPic || defaultTeacherPic}
+              className={classes.teacherPic}
+            />
             <Typography className={classes.teacherName}>
               {data.teacherName}
             </Typography>
