@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import defaultImage from "./defaultcourseimg.jpg"; // Tell webpack this JS file uses this image
+import defaultImage from "./defaultcourseimg.jpg";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import { useMediaQuery } from "react-responsive";
@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 const useStyles = (onPhone) =>
   makeStyles((theme) => ({
     courseName: {
-      fontSize: onPhone ? ".8rem" : "1.1rem",
+      fontSize: onPhone ? ".8rem" : "1.3rem",
       fontFamily: "Palantino",
       marginBottom: 0,
       paddingBottom: 0,
@@ -18,29 +18,29 @@ const useStyles = (onPhone) =>
       color: "#444053",
     },
     courseDescription: {
-      fontSize: onPhone ? ".6rem" : ".9rem",
+      fontSize: onPhone ? ".6rem" : "1rem",
       fontFamily: "Palantino",
       marginBottom: 0,
       paddingBottom: 0,
     },
     courseTeacher: {
-      fontSize: onPhone ? ".6rem" : ".9rem",
+      fontSize: onPhone ? ".6rem" : "1rem",
       color: "#303030",
       fontFamily: "Palantino",
     },
     companyName: {
       color: "#303030",
-      fontSize: onPhone ? ".6rem" : ".9rem",
+      fontSize: onPhone ? ".6rem" : "1rem",
       fontFamily: "Palantino",
     },
     price: {
-      fontSize: onPhone ? ".6rem" : ".9rem",
+      fontSize: onPhone ? ".6rem" : "1rem",
       fontFamily: "Palantino",
       fontWeight: "bold",
       color: "#444053",
     },
     courseDuration: {
-      fontSize: onPhone ? ".6rem" : ".9rem",
+      fontSize: onPhone ? ".6rem" : "1rem",
       fontFamily: "Palantino",
       color: "#505050",
     },

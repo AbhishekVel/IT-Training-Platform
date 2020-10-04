@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Loader from "react-loader-spinner";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Home from "./home/Home";
-import CreateListing from "./listings/CreateListing";
-import About from "./about/About";
-import Feedback from "./feedback/Feedback";
+import HomePage from "./home/HomePage";
+import CreateListingPage from "./listings/CreateListingPage";
+import AboutPage from "./about/AboutPage";
+import FeedbackPage from "./feedback/FeedbackPage";
 import { useMediaQuery } from "react-responsive";
 import ListingPage from "./listings/ListingPage";
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "88vh",
+    minHeight: "86vh",
   },
   footerContainer: {
     display: "flex",
@@ -128,19 +128,19 @@ export default function App() {
 
           <Switch>
             <Route path="/feedback">
-              <Feedback></Feedback>
+              <FeedbackPage></FeedbackPage>
             </Route>
             <Route path="/about">
-              <About></About>
+              <AboutPage />
             </Route>
             <Route path="/createlisting">
-              <CreateListing user={user}></CreateListing>
+              <CreateListingPage user={user}></CreateListingPage>
             </Route>
             <Route path="/courses/:id">
               <ListingPage user={user} />
             </Route>
             <Route path="/">
-              <Home user={user} />
+              <HomePage user={user} />
             </Route>
           </Switch>
         </Router>
