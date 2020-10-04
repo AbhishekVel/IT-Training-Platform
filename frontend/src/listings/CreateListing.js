@@ -1,371 +1,226 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
+import { TextField, Container } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import AddBoxIcon from "@material-ui/icons/AddBox";
+import SendIcon from "@material-ui/icons/Send";
 
-function Header() {
-  const headerContainer = {
-    fontSize: "40px",
-    fontWeight: "bold",
-    fontFamily: "Palantino",
-    display: "flex",
-    justifyContent: "center",
-  };
-  return <div style={headerContainer}>Add New Listing</div>;
-}
-
-class CreateListing extends React.Component {
-  state = {
-    listings: [{ date: "", link: "" }],
-    teacherName: "",
+const defaultRepeatedValues = [
+  {
     courseName: "",
-    description: "",
+    courseDateTime: "",
+  },
+];
+
+const defaultValues = [
+  {
+    firstName: "",
+    lastName: "",
     companyName: "",
-    teacherLink: "",
-    courseLink: "",
-    formSubmitted: false,
-    correctAccessToken: "",
-    accessToken: "",
-    displayTokenPage: true,
-    incorrectAccessToken: false,
-  };
+  },
+];
 
-  handleChange = (e) => {
-    this.setState({ formSubmitted: false });
-    if (["date", "link"].includes(e.target.className)) {
-      let listings = [...this.state.listings];
-      listings[e.target.dataset.id][e.target.className] = e.target.value;
-      this.setState({ listings });
-    } else {
-      this.setState({ [e.target.name]: e.target.value });
-    }
-  };
+const useStyles = makeStyles((theme) => ({
+  container: {
+    backgroundImage: "linear-gradient(#E3EAF7, #E3EAF7, #F7F8FA)",
+  },
+  layout: {
+    width: "auto",
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: 600,
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
+  },
+  paper: {
+    borderRadius: "20px",
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
+  },
+  formTitle: {
+    fontFamily: "Palatino",
+    color: "#444053",
+  },
+  addRemoveButton: {
+    textDecoration: "none",
+  },
+}));
 
-  addListing = (e) => {
-    this.setState((prevState) => ({
-      listings: [...prevState.listings, { date: "", link: "" }],
-    }));
-  };
+export default function CreateListing() {
+  const classes = useStyles();
+  const [fields, setFields] = useState(defaultValues);
+  const [repeatedFields, setRepeatedFields] = useState(defaultRepeatedValues);
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  function handleChangeInput(event) {
+    const values = [...fields];
+    const { name, value } = event.target;
+    values[name] = value;
+    setFields(values);
+  }
 
-    this.state.listings.forEach(function (listing) {
-      listing.date = new Date(listing.date);
-    });
+  function handleChangeInputRepeatedFields(i, event) {
+    const values = [...repeatedFields];
+    const { name, value } = event.target;
+    values[i][name] = value;
+    setRepeatedFields(values);
+  }
 
-    let objToSend = {
-      courseName: this.state.courseName,
-      description: this.state.description,
-      teacherName: this.state.teacherName,
-      companyName: this.state.companyName,
-      courseOverviewLink: this.state.courseLink,
-      teacherLink: this.state.teacherLink,
-      listings: this.state.listings,
-    };
-    this.setState({
-      listings: [{ date: "", link: "" }],
-      teacherName: "",
+  function handleAddInputRepeatedFields() {
+    const values = [...repeatedFields];
+    values.push({
       courseName: "",
-      description: "",
-      companyName: "",
-      teacherLink: "",
-      courseLink: "",
-      formSubmitted: true,
+      courseDateTime: "",
     });
-    this.props.user.functions.insertListing(objToSend);
-  };
+    setRepeatedFields(values);
+  }
 
-  handleTokenChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  function handleRemoveInputRepeatedFields(i) {
+    const values = [...repeatedFields];
+    values.splice(i, 1);
+    setRepeatedFields(values);
+  }
 
-  handleTokenSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    const listOfAccessTokens = [
-      "67538",
-      "40033",
-      "22029",
-      "75949",
-      "15386",
-      "96836",
-      "44762",
-      "33852",
-      "43975",
-      "63168",
-      "44275",
-      "34463",
-      "51804",
-      "90850",
-      "18224",
-      "35518",
-      "26754",
-      "10904",
-      "24081",
-      "95630",
-    ];
-    if (listOfAccessTokens.includes(this.state.accessToken)) {
-      this.setState({ correctAccessToken: true, displayTokenPage: false });
-    } else {
-      this.setState({ incorrectAccessToken: true });
-    }
-  };
+    console.log(fields);
+    console.log(repeatedFields);
+  }
 
-  render() {
-    const root = {
-      display: "flex",
-      justifyContent: "center",
-    };
-
-    const textField = {
-      width: "75ch",
-      height: "7ch",
-      margin: "5px",
-      font: "Palantino",
-    };
-
-    const submitButton = {
-      width: "70ch",
-      height: "7ch",
-      margin: "5px",
-      font: "Palantino",
-    };
-
-    const dateButton = {
-      width: "69.5ch",
-      height: "7ch",
-      margin: "5px",
-      font: "Palantino",
-    };
-
-    const submitText = {
-      display: "flex",
-      justifyContent: "center",
-      fontWeight: "bold",
-      fontFamily: "Palantino",
-      color: "green",
-    };
-
-    const accessTokenText = {
-      display: "flex",
-      justifyContent: "center",
-      fontWeight: "bold",
-      fontFamily: "Palantino",
-      fontSize: "20px",
-    };
-
-    const incorrectAccessTokenText = {
-      display: "flex",
-      justifyContent: "center",
-      fontWeight: "bold",
-      fontFamily: "Palantino",
-      fontSize: "20px",
-      color: "red",
-    };
-
-    const demoNumberLabel = {
-      display: "flex",
-      justifyContent: "center",
-      fontWeight: "bold",
-      fontFamily: "Palantino",
-    };
-
-    let {
-      teacherName,
-      courseName,
-      description,
-      companyName,
-      teacherLink,
-      courseLink,
-      listings,
-      accessToken,
-    } = this.state;
-
-    return (
-      <div>
-        {this.state.displayTokenPage && (
-          <div style={root}>
-            <FormControl>
-              <p style={accessTokenText}>
-                Please type in the access token provided to you, to be able to
-                add a listing.
-              </p>
-              {this.state.incorrectAccessToken && (
-                <p style={incorrectAccessTokenText}>
-                  Incorrect Access Token, please try again!
-                </p>
-              )}
-              <input
-                style={textField}
-                required
-                type="text"
-                variant="outlined"
-                name="accessToken"
-                id="accessToken"
-                value={accessToken}
-                placeholder="Access Token"
-                onChange={this.handleTokenChange}
-              />
-              <div>
+  return (
+    <div className={classes.container}>
+      <main className={classes.layout}>
+        <Paper className={classes.paper}>
+          <Typography
+            component="h1"
+            variant="h3"
+            align="center"
+            color="textPrimary"
+            gutterBottom
+            className={classes.formTitle}
+          >
+            Add Listing
+          </Typography>
+          <form encType="multipart/form-data" onSubmit={(e) => handleSubmit(e)}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="firstName"
+                  name="firstName"
+                  label="First name"
+                  fullWidth
+                  value={fields.firstName}
+                  onChange={(e) => handleChangeInput(e)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="lastName"
+                  name="lastName"
+                  label="Last name"
+                  fullWidth
+                  value={fields.lastName}
+                  onChange={(e) => handleChangeInput(e)}
+                />
+              </Grid>
+            </Grid>
+            {repeatedFields.map((field, idx) => {
+              return (
+                <div>
+                  <Grid>
+                    <Grid xs={12} key={`${field}-${idx}`}>
+                      <TextField
+                        required
+                        id="courseName"
+                        name="courseName"
+                        label="Course Name"
+                        fullWidth
+                        value={repeatedFields.courseName}
+                        onChange={(e) =>
+                          handleChangeInputRepeatedFields(idx, e)
+                        }
+                      />
+                    </Grid>
+                    <TextField
+                      required
+                      id="courseDateTime"
+                      name="courseDateTime"
+                      label="Date and Time"
+                      type="datetime-local"
+                      fullWidth
+                      autoComplete="shipping address-line2"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      value={repeatedFields.courseDateTime}
+                      onChange={(e) => handleChangeInputRepeatedFields(idx, e)}
+                    />
+                  </Grid>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="flex-end"
+                  >
+                    <Button
+                      size="large"
+                      onClick={() => handleAddInputRepeatedFields()}
+                      startIcon={<AddBoxIcon />}
+                    >
+                      Add course
+                    </Button>
+                    <Button
+                      className={classes.addRemoveButton}
+                      size="large"
+                      startIcon={<DeleteForeverIcon />}
+                      onClick={() => handleRemoveInputRepeatedFields(idx)}
+                    >
+                      Remove course
+                    </Button>
+                  </Grid>
+                </div>
+              );
+            })}
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="companyName"
+                  name="companyName"
+                  label="Company name"
+                  fullWidth
+                  value={fields.companyName}
+                  onChange={(e) => handleChangeInput(e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <Button
-                  style={submitButton}
+                  startIcon={<SendIcon />}
                   variant="contained"
                   color="primary"
+                  fullWidth
                   type="submit"
-                  onClick={this.handleTokenSubmit}
                 >
                   Submit
                 </Button>
-              </div>
-            </FormControl>
-          </div>
-        )}
-        {this.state.correctAccessToken && (
-          <div>
-            <div>
-              <Header></Header>
-            </div>
-            <div>
-              {this.state.formSubmitted && (
-                <p style={submitText}>
-                  Thanks for submitting the listing! Submit another one if you
-                  would like to!
-                </p>
-              )}
-            </div>
-            <div style={root}>
-              <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-                <FormControl>
-                  <input
-                    style={textField}
-                    required
-                    type="text"
-                    variant="outlined"
-                    name="teacherName"
-                    id="teacherName"
-                    value={teacherName}
-                    placeholder="Teacher Name"
-                  />
-                  <input
-                    style={textField}
-                    required
-                    label="Demo Course Name"
-                    type="text"
-                    variant="outlined"
-                    name="courseName"
-                    id="courseName"
-                    value={courseName}
-                    placeholder="Demo Course Name"
-                  />
-                  <input
-                    style={textField}
-                    required
-                    label="Description"
-                    type="text"
-                    variant="outlined"
-                    name="description"
-                    id="description"
-                    value={description}
-                    placeholder="Description"
-                  />
-                  <input
-                    style={textField}
-                    required
-                    label="Company Name"
-                    type="text"
-                    variant="outlined"
-                    id="companyName"
-                    name="companyName"
-                    value={companyName}
-                    placeholder="Company Name"
-                  />
-                  <input
-                    style={textField}
-                    label="Course Overview Link (optional)"
-                    type="text"
-                    variant="outlined"
-                    value={courseLink}
-                    id="courseLink"
-                    name="courseLink"
-                    placeholder="Demo Course Overview Link (optional)"
-                  />
-                  <input
-                    style={textField}
-                    label="Teacher Link [i.e. LinkedIn, GitHub, ...] (optional)"
-                    type="text"
-                    variant="outlined"
-                    id="teacherLink"
-                    name="teacherLink"
-                    value={teacherLink}
-                    placeholder="Teacher Link [i.e. LinkedIn, GitHub, ...] (optional) "
-                  />
-                  {listings.map((val, idx) => {
-                    let dateId = `date-${idx}`,
-                      linkId = `link-${idx}`;
-                    return (
-                      <div key={idx}>
-                        <div>
-                          <div>
-                            <label
-                              style={demoNumberLabel}
-                              htmlFor={linkId}
-                            >{`Demo #${idx + 1}`}</label>
-                          </div>
-                          <div>
-                            <input
-                              required
-                              style={textField}
-                              label="Demo Registration Link"
-                              type="text"
-                              variant="outlined"
-                              name={linkId}
-                              data-id={idx}
-                              id={linkId}
-                              className="link"
-                              value={listings[idx].link}
-                              placeholder="Demo Registration Link"
-                            />
-                          </div>
-                          <input
-                            required
-                            style={dateButton}
-                            className="date"
-                            id={dateId}
-                            data-id={idx}
-                            label="Course date and time"
-                            type="datetime-local"
-                            variant="outlined"
-                            name={dateId}
-                            value={listings[idx].date}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-                  <Button
-                    style={submitButton}
-                    variant="contained"
-                    color="primary"
-                    onClick={this.addListing}
-                  >
-                    Add another demo link and time
-                  </Button>
-                  <Button
-                    style={submitButton}
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                  >
-                    Submit
-                  </Button>
-                </FormControl>
-              </form>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
+              </Grid>
+            </Grid>
+          </form>
+        </Paper>
+      </main>
+    </div>
+  );
 }
-
-export default CreateListing;
