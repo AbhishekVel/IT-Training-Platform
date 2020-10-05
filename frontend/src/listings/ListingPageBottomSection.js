@@ -53,7 +53,7 @@ export default function ListingPageButtomSection({ data }) {
               className={classes.teacherPic}
             />
             <Typography className={classes.teacherName}>
-              {data.teacherName}
+              Instructor {data.teacherName}
             </Typography>
             <Typography className={classes.teacherBio}>
               {data.teacherBio}

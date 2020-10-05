@@ -107,22 +107,18 @@ export default function App() {
                 />
               </Link>
               <Typography variant="h6" className={classes.title}></Typography>
-              <Button color="inherit">
-                <Link
-                  style={{ textDecoration: "none", color: "inherit" }}
-                  to="/about"
-                >
-                  About
-                </Link>
-              </Button>
-              <Button color="inherit">
-                <Link
-                  style={{ textDecoration: "none", color: "inherit" }}
-                  to="/feedback"
-                >
-                  Feedback
-                </Link>
-              </Button>
+              <Link
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/about"
+              >
+                <Button color="inherit">About</Button>
+              </Link>
+              <Link
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/feedback"
+              >
+                <Button color="inherit">Feedback</Button>
+              </Link>
             </Toolbar>
           </AppBar>
 
