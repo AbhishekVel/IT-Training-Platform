@@ -61,22 +61,27 @@ export default function ListingPageButtomSection({ data }) {
           </Paper>
         </Grid>
 
-        <Grid item container xs={12} md={6}>
-          <Paper className={classes.courseOverview}>
-            <Typography className={classes.courseOverviewTitle}>
-              Course Overview
-            </Typography>
-            <Typography className={classes.courseLongDescription}>
-              {data.longDescription}
-            </Typography>
-
-            <Typography className={classes.courseRequirementsTitle}>
-              Requirements
-            </Typography>
-            <Typography className={classes.courseRequirements}>
-              {data.requirements || "Nothing but a positive attitude!"}
-            </Typography>
-          </Paper>
+        <Grid item container xs={12} md={6} spacing={2} direction="column">
+          <Grid item>
+            <Paper className={classes.courseOverview}>
+              <Typography className={classes.courseOverviewTitle}>
+                Course Overview
+              </Typography>
+              <Typography className={classes.courseLongDescription}>
+                {data.longDescription}
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item>
+            <Paper className={classes.courseOverview}>
+              <Typography className={classes.courseRequirementsTitle}>
+                Requirements
+              </Typography>
+              <Typography className={classes.courseRequirements}>
+                {data.requirements || "Nothing but a positive attitude!"}
+              </Typography>
+            </Paper>
+          </Grid>
         </Grid>
       </Grid>
 
@@ -138,7 +143,6 @@ const useStyles = (onPhone) =>
       padding: theme.spacing(2, 2, 2, 2),
     },
     courseRequirementsTitle: {
-      marginTop: "5%",
       color: "#5A556E",
       fontFamily: "Palantino",
       fontWeight: "bold",

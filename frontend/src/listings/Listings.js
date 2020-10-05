@@ -102,6 +102,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#F6F8FC",
     borderRadius: "35px",
     paddingBottom: "10px",
+    width: "90%",
   },
   searchBar: {
     display: "flex",

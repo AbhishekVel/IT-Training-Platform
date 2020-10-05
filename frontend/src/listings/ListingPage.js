@@ -59,7 +59,7 @@ export default function ListingPage({ user }) {
         <div className={classes.mainCourseDetails}>
           <Grid container spacing={1}>
             <Grid item container md={2} spacing={2}>
-              <Grid item xs={4}>
+              <Grid item xs={4} md={12}>
                 <img
                   className={classes.courseImage}
                   src={data.courseImageUrl || defaultImage}
