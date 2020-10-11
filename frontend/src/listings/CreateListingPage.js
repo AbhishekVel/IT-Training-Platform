@@ -178,7 +178,6 @@ export default function CreateListing({ user }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   id="coursePrice"
                   name="coursePrice"
                   label="Course Price"
