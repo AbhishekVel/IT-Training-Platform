@@ -35,11 +35,12 @@ export default function ListingPageButtomSection({ data }) {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const classes = useStyles(isTabletOrMobile)();
 
-  const firstColumnLearnList = data.learnList.slice(
-    0,
-    data.learnList.length / 2
-  );
-  const secondColumnLearnList = data.learnList.slice(data.learnList.length / 2);
+  const hasLearnList = data.learnList && data.learnList.length > 0;
+
+  const firstColumnLearnList = (learnList) =>
+    learnList.slice(0, learnList.length / 2);
+  const secondColumnLearnList = (learnList) =>
+    learnList.slice(learnList.length / 2);
 
   return (
     <div className={classes.bottomSection}>
@@ -84,20 +85,21 @@ export default function ListingPageButtomSection({ data }) {
           </Grid>
         </Grid>
       </Grid>
-
-      <div className={classes.whatYoullLearnSection}>
-        <Typography className={classes.whatYoullLearnText}>
-          Course Outline
-        </Typography>
-        <div style={{ flex: 1, display: "flex", flexDirection: "row" }}>
-          <Grid item xs={6}>
-            {renderLearnList(classes, firstColumnLearnList)}
-          </Grid>
-          <Grid item xs={6}>
-            {renderLearnList(classes, secondColumnLearnList)}
-          </Grid>
+      {hasLearnList && (
+        <div className={classes.whatYoullLearnSection}>
+          <Typography className={classes.whatYoullLearnText}>
+            Course Outline
+          </Typography>
+          <div style={{ flex: 1, display: "flex", flexDirection: "row" }}>
+            <Grid item xs={6}>
+              {renderLearnList(classes, firstColumnLearnList(data.learnList))}
+            </Grid>
+            <Grid item xs={6}>
+              {renderLearnList(classes, secondColumnLearnList(data.learnList))}
+            </Grid>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
