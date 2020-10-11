@@ -70,41 +70,55 @@ export default function ListingPage({ user }) {
               {/* Empty grid */}
             </Grid>
             <Grid item container xs={12} md={7}>
-              <Typography className={classes.courseName}>
-                {data.courseName}
-              </Typography>
-              <Typography className={classes.courseDescription}>
-                {data.briefDescription}
-              </Typography>
-              <Typography className={classes.courseDuration}>
-                {data.totalHours} hours ○ {data.totalDays} days
-              </Typography>
+              <Grid item xs={12}>
+                <Typography className={classes.courseName}>
+                  {data.courseName}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography className={classes.courseDescription}>
+                  {data.briefDescription}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography className={classes.courseDuration}>
+                  {data.totalHours} hours ○ {data.totalDays} days
+                </Typography>
+              </Grid>
             </Grid>
             <Grid container item xs={12} md={2} alignItems="center">
               <div className={classes.rightSideMainDetails}>
-                <Typography className={classes.price}>
-                  Course cost: ₹{data.price}
-                </Typography>
-                {data.contactEmail && (
-                  <Typography className={classes.contact}>
-                    Email: {data.contactEmail}
+                <Grid item xs={12}>
+                  <Typography className={classes.price}>
+                    Course cost: ₹{data.price}
                   </Typography>
-                )}
-                {data.contactPhone && (
-                  <Typography className={classes.contact}>
-                    Phone: {formatPhoneNumber(data.contactPhone)}
-                  </Typography>
-                )}
-                {data.courseLink && (
-                  <Button
-                    onClick={() => {
-                      window.location.href = data.courseLink;
-                    }}
-                    className={classes.enquiryButton}
-                  >
-                    Enroll in class
-                  </Button>
-                )}
+                </Grid>
+                <Grid item xs={12}>
+                  {data.contactEmail && (
+                    <Typography className={classes.contact}>
+                      Email: {data.contactEmail}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12}>
+                  {data.contactPhone && (
+                    <Typography className={classes.contact}>
+                      Phone: {formatPhoneNumber(data.contactPhone)}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12}>
+                  {data.courseLink && (
+                    <Button
+                      onClick={() => {
+                        window.location.href = data.courseLink;
+                      }}
+                      className={classes.enquiryButton}
+                    >
+                      Enroll in class
+                    </Button>
+                  )}
+                </Grid>
               </div>
             </Grid>
           </Grid>
