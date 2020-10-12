@@ -170,7 +170,7 @@ export default function CreateListing({ user }) {
                   name="courseDescription"
                   label="Brief Course Description"
                   multiline={true}
-                  maxLength={30}
+                  maxLength={150}
                   fullWidth
                   value={fields.courseDescription}
                   onChange={(e) => handleChangeInput(e)}
