@@ -80,11 +80,13 @@ export default function ListingPage({ user }) {
                   {data.briefDescription}
                 </Typography>
               </Grid>
-              <Grid item xs={12}>
-                <Typography className={classes.courseDuration}>
-                  {data.totalHours} hours ○ {data.totalDays} days
-                </Typography>
-              </Grid>
+              {data.totalHours && data.totalDays && (
+                <Grid item xs={12}>
+                  <Typography className={classes.courseDuration}>
+                    {data.totalHours} hours ○ {data.totalDays} days
+                  </Typography>
+                </Grid>
+              )}
             </Grid>
             <Grid container item xs={12} md={2} alignItems="center">
               <div className={classes.rightSideMainDetails}>

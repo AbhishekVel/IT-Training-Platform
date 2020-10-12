@@ -114,11 +114,13 @@ export default function Listing({ data, shaded }) {
           </Grid>
           {/* NEW ROW */}
 
-          <Grid item xs={5}>
-            <Typography className={classes.courseDuration}>
-              {data.totalHours} hours ○ {data.totalDays} days
-            </Typography>
-          </Grid>
+          {data.totalHours && data.totalDays && (
+            <Grid item xs={5}>
+              <Typography className={classes.courseDuration}>
+                {data.totalHours} hours ○ {data.totalDays} days
+              </Typography>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </ListItem>
