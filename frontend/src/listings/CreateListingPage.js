@@ -316,21 +316,17 @@ export default function CreateListing({ user }) {
             </Grid>
             {repeatedFields.map((field, idx) => {
               return (
-                <Grid>
-                  <Grid>
-                    <Grid item xs={12} key={`${field}-${idx}`}>
-                      <TextField
-                        required
-                        id="syllabus"
-                        name="syllabus"
-                        label="Syllabus [Course topic ex. Hadoop, Java]"
-                        fullWidth
-                        value={repeatedFields.syllabus}
-                        onChange={(e) =>
-                          handleChangeInputRepeatedFields(idx, e)
-                        }
-                      />
-                    </Grid>
+                <Grid key={`${field}-${idx}`}>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      id="syllabus"
+                      name="syllabus"
+                      label="Syllabus [Course topic ex. Hadoop, Java]"
+                      fullWidth
+                      value={field.syllabus}
+                      onChange={(e) => handleChangeInputRepeatedFields(idx, e)}
+                    />
                   </Grid>
                   <Grid
                     container
