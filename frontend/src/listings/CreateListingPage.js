@@ -170,7 +170,7 @@ export default function CreateListing({ user }) {
                   name="courseDescription"
                   label="Brief Course Overview"
                   multiline={true}
-                  maxLength={200}
+                  maxLength={150}
                   fullWidth
                   value={fields.courseDescription}
                   onChange={(e) => handleChangeInput(e)}
@@ -189,7 +189,6 @@ export default function CreateListing({ user }) {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   id="courseHours"
                   name="courseHours"
                   label="Total length of course (hours)"
@@ -201,7 +200,6 @@ export default function CreateListing({ user }) {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   id="courseDays"
                   name="courseDays"
                   label="Total length of course (days)"
