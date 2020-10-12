@@ -88,27 +88,29 @@ export default function ListingPage({ user }) {
             </Grid>
             <Grid container item xs={12} md={2} alignItems="center">
               <div className={classes.rightSideMainDetails}>
-                <Grid item xs={12}>
-                  <Typography className={classes.price}>
-                    Course cost: ₹{data.price}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  {data.contactEmail && (
+                {data.price && (
+                  <Grid item xs={12}>
+                    <Typography className={classes.price}>
+                      Course cost: ₹{data.price}
+                    </Typography>
+                  </Grid>
+                )}
+                {data.contactEmail && (
+                  <Grid item xs={12}>
                     <Typography className={classes.contact}>
                       Email: {data.contactEmail}
                     </Typography>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  {data.contactPhone && (
+                  </Grid>
+                )}
+                {data.contactPhone && (
+                  <Grid item xs={12}>
                     <Typography className={classes.contact}>
                       Phone: {formatPhoneNumber(data.contactPhone)}
                     </Typography>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  {data.courseLink && (
+                  </Grid>
+                )}
+                {data.courseLink && (
+                  <Grid item xs={12}>
                     <Button
                       onClick={() => {
                         window.location.href = data.courseLink;
@@ -117,8 +119,8 @@ export default function ListingPage({ user }) {
                     >
                       Enroll in class
                     </Button>
-                  )}
-                </Grid>
+                  </Grid>
+                )}
               </div>
             </Grid>
           </Grid>

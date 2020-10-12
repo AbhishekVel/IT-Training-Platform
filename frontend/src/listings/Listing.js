@@ -86,9 +86,11 @@ export default function Listing({ data, shaded }) {
               {data.courseName}
             </Typography>
           </Grid>
-          <Grid item xs={3} container justify="flex-end">
-            <Typography className={classes.price}>₹{data.price}</Typography>
-          </Grid>
+          {data.price && (
+            <Grid item xs={3} container justify="flex-end">
+              <Typography className={classes.price}>₹{data.price}</Typography>
+            </Grid>
+          )}
           {/* NEW ROW */}
           <Grid item xs={12}>
             <Typography className={classes.courseDescription}>
