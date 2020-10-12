@@ -19,19 +19,19 @@ const defaultValues = [
   {
     companyName: "",
     courseName: "",
-    courseDescription: "",
-    coursePrice: "",
+    briefDescription: "",
+    price: "",
     courseImageUrl: "",
-    fullCourseDescription: "",
+    longDescription: "",
     courseLink: "",
     contactPhone: "",
     contactEmail: "",
-    courseHours: "",
-    courseDays: "",
+    totalHours: "",
+    totalDays: "",
     teacherName: "",
-    teacherPicture: "",
+    teacherPic: "",
     teacherBio: "",
-    sampleLectureCourseYoutubeUrl: "",
+    sampleYoutubeLectureVideoUrl: "",
   },
 ];
 
@@ -113,19 +113,19 @@ export default function CreateListing({ user }) {
     var objToSendToBackend = {
       companyName: fields[0].companyName,
       courseName: fields[0].courseName,
-      courseDescription: fields[0].courseDescription,
-      coursePrice: fields[0].coursePrice,
+      briefDescription: fields[0].briefDescription,
+      price: fields[0].price,
       courseImageUrl: fields[0].courseImageUrl,
-      fullCourseDescription: fields[0].fullCourseDescription,
+      longDescription: fields[0].longDescription,
       courseLink: fields[0].courseLink,
       contactPhone: fields[0].contactPhone,
       contactEmail: fields[0].contactEmail,
-      courseHours: fields[0].courseHours,
-      courseDays: fields[0].courseDays,
+      totalHours: fields[0].totalHours,
+      totalDays: fields[0].totalDays,
       teacherName: fields[0].teacherName,
-      teacherPicture: fields[0].teacherPicture,
+      teacherPic: fields[0].teacherPic,
       teacherBio: fields[0].teacherBio,
-      sampleLectureCourseYoutubeUrl: fields[0].sampleLectureCourseYoutubeUrl,
+      sampleYoutubeLectureVideoUrl: fields[0].sampleYoutubeLectureVideoUrl,
       syllabus: repeatedFields,
     };
 
@@ -161,51 +161,53 @@ export default function CreateListing({ user }) {
                   fullWidth
                   value={fields.courseName}
                   onChange={(e) => handleChangeInput(e)}
+                  inputProps={{ maxLength: 100 }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
-                  id="courseDescription"
-                  name="courseDescription"
-                  label="Brief Course Description"
+                  id="briefDescription"
+                  name="briefDescription"
+                  label="Brief Course Overview"
                   multiline={true}
                   maxLength={150}
                   fullWidth
-                  value={fields.courseDescription}
+                  value={fields.briefDescription}
                   onChange={(e) => handleChangeInput(e)}
+                  inputProps={{ maxLength: 200 }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  id="coursePrice"
-                  name="coursePrice"
+                  id="price"
+                  name="price"
                   label="Course Price"
                   type="number"
                   fullWidth
-                  value={fields.coursePrice}
+                  value={fields.price}
                   onChange={(e) => handleChangeInput(e)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  id="courseHours"
-                  name="courseHours"
+                  id="totalHours"
+                  name="totalHours"
                   label="Total length of course (hours)"
                   type="number"
                   fullWidth
-                  value={fields.courseHours}
+                  value={fields.totalHours}
                   onChange={(e) => handleChangeInput(e)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  id="courseDays"
-                  name="courseDays"
+                  id="totalDays"
+                  name="totalDays"
                   label="Total length of course (days)"
                   type="number"
                   fullWidth
-                  value={fields.courseDays}
+                  value={fields.totalDays}
                   onChange={(e) => handleChangeInput(e)}
                 />
               </Grid>
@@ -232,23 +234,24 @@ export default function CreateListing({ user }) {
               <Grid item xs={12}>
                 <TextField
                   required
-                  id="fullCourseDescription"
-                  name="fullCourseDescription"
+                  id="longDescription"
+                  name="longDescription"
                   label="Full Course Description"
                   fullWidth
                   multiline={true}
-                  value={fields.fullCourseDescription}
+                  value={fields.longDescription}
                   onChange={(e) => handleChangeInput(e)}
+                  inputProps={{ maxLength: 1000 }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  id="sampleLectureCourseYoutubeUrl"
-                  name="sampleLectureCourseYoutubeUrl"
+                  id="sampleYoutubeLectureVideoUrl"
+                  name="sampleYoutubeLectureVideoUrl"
                   label="Sample lecture youtube URL (optional)"
                   fullWidth
                   multiline={true}
-                  value={fields.sampleLectureCourseYoutubeUrl}
+                  value={fields.sampleYoutubeLectureVideoUrl}
                   onChange={(e) => handleChangeInput(e)}
                 />
               </Grid>
@@ -264,11 +267,11 @@ export default function CreateListing({ user }) {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  id="teacherPicture"
-                  name="teacherPicture"
+                  id="teacherPic"
+                  name="teacherPic"
                   label="Teacher picture Url (optional)"
                   fullWidth
-                  value={fields.teacherPicture}
+                  value={fields.teacherPic}
                   onChange={(e) => handleChangeInput(e)}
                 />
               </Grid>
@@ -316,17 +319,22 @@ export default function CreateListing({ user }) {
             </Grid>
             {repeatedFields.map((field, idx) => {
               return (
-                <Grid key={`${field}-${idx}`}>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      id="syllabus"
-                      name="syllabus"
-                      label="Syllabus [Course topic ex. Hadoop, Java]"
-                      fullWidth
-                      value={field.syllabus}
-                      onChange={(e) => handleChangeInputRepeatedFields(idx, e)}
-                    />
+                <Grid>
+                  <Grid>
+                    <Grid item xs={12} key={`${field}-${idx}`}>
+                      <TextField
+                        required
+                        id="syllabus"
+                        name="syllabus"
+                        label="Syllabus [Course topic ex. Hadoop, Java]"
+                        fullWidth
+                        value={repeatedFields.syllabus}
+                        onChange={(e) =>
+                          handleChangeInputRepeatedFields(idx, e)
+                        }
+                        inputProps={{ maxLength: 100 }}
+                      />
+                    </Grid>
                   </Grid>
                   <Grid
                     container
