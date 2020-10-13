@@ -1,4 +1,5 @@
 import React from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Listings from "../listings/Listings";
 import homeImg from "./../illustrations/undraw_youtube_tutorial_2gn3.svg";

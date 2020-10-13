@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -80,10 +80,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleContainer() {
+export default function SimpleContainer({ user }) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(2);
-  const [hover, setHover] = React.useState(-1);
+  const [value, setValue] = useState(2);
+  const [hover, setHover] = useState(-1);
+  const [feedbackValue, setFeedbackValue] = useState();
+
+  function handleFeedbackChange(e) {
+    setFeedbackValue(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    var objToSend = {
+      rating: value,
+      feedback: feedbackValue,
+    };
+    user.functions.submitFeedback(objToSend);
+    e.target.reset();
+    setValue(2);
+  }
 
   return (
     <React.Fragment>
@@ -99,67 +115,75 @@ export default function SimpleContainer() {
         >
           Please give us feedback!
         </Typography>
-        <Container className={classes.feedbackOuterContainer}>
-          <Typography
-            component="div"
-            style={{
-              backgroundColor: "white",
-              height: "50vh",
-              width: "75vh",
-            }}
-            className={classes.feedbackInnerContainer}
-          >
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <Container className={classes.feedbackOuterContainer}>
             <Typography
-              component="h1"
-              variant="h6"
-              color="textPrimary"
-              gutterBottom
-              className={classes.rateTheWebsite}
+              component="div"
+              style={{
+                backgroundColor: "white",
+                height: "50vh",
+                width: "75vh",
+              }}
+              className={classes.feedbackInnerContainer}
             >
-              Rate the website
+              <Typography
+                component="h1"
+                variant="h6"
+                color="textPrimary"
+                gutterBottom
+                className={classes.rateTheWebsite}
+              >
+                Rate the website
+              </Typography>
+              <Rating
+                className={classes.ratingStars}
+                name="hover-feedback"
+                value={value}
+                precision={0.5}
+                size="large"
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+                onChangeActive={(event, newHover) => {
+                  setHover(newHover);
+                }}
+              />
+              {value !== null && (
+                <Box className={classes.ratingText} ml={4}>
+                  {labels[hover !== -1 ? hover : value]}
+                </Box>
+              )}
+              <Typography
+                component="h1"
+                variant="h6"
+                color="textPrimary"
+                gutterBottom
+                className={classes.writeFeedback}
+              >
+                Write feedback
+              </Typography>
+              <TextField
+                className={classes.textField}
+                multiline
+                name="feedbackValue"
+                rows={1}
+                fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <Button
+                      color="primary"
+                      type="submit"
+                      className={classes.submitButton}
+                    >
+                      Submit
+                    </Button>
+                  ),
+                }}
+                onChange={handleFeedbackChange}
+              />
             </Typography>
-            <Rating
-              className={classes.ratingStars}
-              name="hover-feedback"
-              value={value}
-              precision={0.5}
-              size="large"
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-              onChangeActive={(event, newHover) => {
-                setHover(newHover);
-              }}
-            />
-            {value !== null && (
-              <Box className={classes.ratingText} ml={4}>
-                {labels[hover !== -1 ? hover : value]}
-              </Box>
-            )}
-            <Typography
-              component="h1"
-              variant="h6"
-              color="textPrimary"
-              gutterBottom
-              className={classes.writeFeedback}
-            >
-              Write feedback
-            </Typography>
-            <TextField
-              className={classes.textField}
-              multiline
-              rows={1}
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <Button color="primary" className={classes.submitButton}>
-                    Submit
-                  </Button>
-                ),
-              }}
-            />
-          </Typography>
-        </Container>
+          </Container>
+        </form>
       </div>
     </React.Fragment>
   );
