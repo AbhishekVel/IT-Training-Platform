@@ -12,8 +12,8 @@ import CheckIcon from "@material-ui/icons/Check";
 
 import defaultTeacherPic from "../illustrations/defaultTeacherPic.png";
 
-function renderLearnList(classes, learnList) {
-  return learnList.map((learnString, idx) => {
+function renderSyllabus(classes, syllabus) {
+  return syllabus.map((syllabusObj, idx) => {
     return (
       <List>
         <ListItem id={idx}>
@@ -22,7 +22,7 @@ function renderLearnList(classes, learnList) {
           </ListItemIcon>
           <ListItemText>
             <Typography className={classes.learnString}>
-              {learnString}
+              {syllabusObj.syllabus}
             </Typography>
           </ListItemText>
         </ListItem>
@@ -35,12 +35,12 @@ export default function ListingPageButtomSection({ data }) {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const classes = useStyles(isTabletOrMobile)();
 
-  const hasLearnList = data.learnList && data.learnList.length > 0;
+  const hasSyllabus = data.syllabus && data.syllabus.length > 0;
 
-  const firstColumnLearnList = (learnList) =>
-    learnList.slice(0, learnList.length / 2);
-  const secondColumnLearnList = (learnList) =>
-    learnList.slice(learnList.length / 2);
+  const firstColumnSyllabus = (syllabus) =>
+    syllabus.slice(0, Math.ceil(syllabus.length / 2));
+  const secondColumnSyllabus = (syllabus) =>
+    syllabus.slice(Math.ceil(syllabus.length / 2));
 
   return (
     <div className={classes.bottomSection}>
@@ -85,17 +85,17 @@ export default function ListingPageButtomSection({ data }) {
           </Grid>
         </Grid>
       </Grid>
-      {hasLearnList && (
+      {hasSyllabus && (
         <div className={classes.whatYoullLearnSection}>
           <Typography className={classes.whatYoullLearnText}>
             Course Outline
           </Typography>
           <div style={{ flex: 1, display: "flex", flexDirection: "row" }}>
             <Grid item xs={6}>
-              {renderLearnList(classes, firstColumnLearnList(data.learnList))}
+              {renderSyllabus(classes, firstColumnSyllabus(data.syllabus))}
             </Grid>
             <Grid item xs={6}>
-              {renderLearnList(classes, secondColumnLearnList(data.learnList))}
+              {renderSyllabus(classes, secondColumnSyllabus(data.syllabus))}
             </Grid>
           </div>
         </div>
