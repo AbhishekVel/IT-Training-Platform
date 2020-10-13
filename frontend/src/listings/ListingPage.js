@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import ListingPageBottomSection from "./ListingPageBottomSection";
 
 function formatPhoneNumber(phoneNumberString) {
+  //  doesnt work with indian numbers (+91), need to make this more robust
   var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
   var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
   if (match) {
@@ -107,7 +108,7 @@ export default function ListingPage({ user }) {
                 {data.contactPhone && (
                   <Grid item xs={12}>
                     <Typography className={classes.contact}>
-                      Phone: {formatPhoneNumber(data.contactPhone)}
+                      Phone: {data.contactPhone}
                     </Typography>
                   </Grid>
                 )}

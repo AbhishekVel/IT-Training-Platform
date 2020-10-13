@@ -57,7 +57,9 @@ export default function ListingPageButtomSection({ data }) {
               Instructor {data.teacherName}
             </Typography>
             <Typography className={classes.teacherBio}>
-              {data.teacherBio}
+              {data.teacherBio
+                ? data.teacherBio
+                : "Contact course owner for more details on the instructor."}
             </Typography>
           </Paper>
         </Grid>
