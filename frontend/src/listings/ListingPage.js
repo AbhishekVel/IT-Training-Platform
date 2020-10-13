@@ -42,14 +42,16 @@ export default function ListingPage({ user }) {
 
   if (loading) {
     return (
-      <Loader
-        className="_webpageLoading"
-        type="ThreeDots"
-        color="#00BFFF"
-        height={100}
-        width={100}
-        timeout={3000} //3 secs
-      />
+      <div className={classes.loaderContainer}>
+        <Loader
+          className="_webpageLoading"
+          type="ThreeDots"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={3000} //3 secs
+        />
+      </div>
     );
   }
 
@@ -136,6 +138,13 @@ export default function ListingPage({ user }) {
 
 const useStyles = (onPhone) =>
   makeStyles((theme) => ({
+    loaderContainer: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flex: 1,
+      minHeight: "100vh",
+    },
     container: {
       display: "flex",
       padding: 0,
