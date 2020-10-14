@@ -15,27 +15,6 @@ const defaultRepeatedValues = [
   },
 ];
 
-const defaultValues = [
-  {
-    companyName: "",
-    courseName: "",
-    briefDescription: "",
-    requirements: "",
-    price: "",
-    courseImageUrl: "",
-    longDescription: "",
-    courseLink: "",
-    contactPhone: "",
-    contactEmail: "",
-    totalHours: undefined,
-    totalDays: undefined,
-    teacherName: "",
-    teacherPic: "",
-    teacherBio: "",
-    sampleYoutubeLectureVideoUrl: "",
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundImage: "linear-gradient(#E3EAF7, #E3EAF7, #F7F8FA)",
@@ -76,15 +55,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateListing({ user }) {
   const classes = useStyles();
-  const [fields, setFields] = useState(defaultValues);
+  const [courseName, setCourseName] = useState("");
+  const [briefDescription, setBriefDescription] = useState("");
+  const [requirements, setRequirements] = useState("");
+  const [price, setPrice] = useState("");
+  const [courseImageUrl, setCourseImageUrl] = useState("");
+  const [longDescription, setLongDescription] = useState("");
+  const [courseLink, setCourseLink] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [contactEmail, setCompanyEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [totalHours, setTotalHours] = useState("");
+  const [totalDays, setTotalDays] = useState("");
+  const [teacherName, setTeacherName] = useState("");
+  const [teacherBio, setTeacherBio] = useState("");
+  const [teacherPic, setTeacherPic] = useState("");
+  const [
+    sampleYoutubeLectureVideoUrl,
+    setSampleYoutubeLectureVideoUrl,
+  ] = useState("");
   const [repeatedFields, setRepeatedFields] = useState(defaultRepeatedValues);
-
-  function handleChangeInput(event) {
-    const values = [...fields];
-    const { name, value } = event.target;
-    values[0][name] = value;
-    setFields(values);
-  }
 
   function handleChangeInputRepeatedFields(i, event) {
     const values = [...repeatedFields];
@@ -112,26 +102,44 @@ export default function CreateListing({ user }) {
 
     //send to backend
     var objToSendToBackend = {
-      companyName: fields[0].companyName,
-      courseName: fields[0].courseName,
-      briefDescription: fields[0].briefDescription,
-      requirements: fields[0].requirements,
-      price: fields[0].price,
-      courseImageUrl: fields[0].courseImageUrl,
-      longDescription: fields[0].longDescription,
-      courseLink: fields[0].courseLink,
-      contactPhone: fields[0].contactPhone,
-      contactEmail: fields[0].contactEmail,
-      totalHours: fields[0].totalHours,
-      totalDays: fields[0].totalDays,
-      teacherName: fields[0].teacherName,
-      teacherPic: fields[0].teacherPic,
-      teacherBio: fields[0].teacherBio,
-      sampleYoutubeLectureVideoUrl: fields[0].sampleYoutubeLectureVideoUrl,
+      companyName: companyName,
+      courseName: courseName,
+      briefDescription: briefDescription,
+      requirements: requirements,
+      price: price,
+      courseImageUrl: courseImageUrl,
+      longDescription: longDescription,
+      courseLink: courseLink,
+      contactPhone: contactPhone,
+      contactEmail: contactEmail,
+      totalHours: totalHours,
+      totalDays: totalDays,
+      teacherName: teacherName,
+      teacherPic: teacherPic,
+      teacherBio: teacherBio,
+      sampleYoutubeLectureVideoUrl: sampleYoutubeLectureVideoUrl,
       syllabus: repeatedFields,
     };
 
-    user.functions.insertListing(objToSendToBackend);
+    setCourseName("");
+    setCompanyName("");
+    setBriefDescription("");
+    setRequirements("");
+    setPrice("");
+    setCourseImageUrl("");
+    setLongDescription("");
+    setCourseLink("");
+    setContactPhone("");
+    setCompanyEmail("");
+    setTotalHours("");
+    setTotalDays("");
+    setTeacherPic("");
+    setTeacherName("");
+    setTeacherBio("");
+    setSampleYoutubeLectureVideoUrl("");
+    setRepeatedFields(defaultRepeatedValues);
+    console.log(objToSendToBackend);
+    // user.functions.insertListing(objToSendToBackend);
 
     //clear input
     e.target.reset();
@@ -161,8 +169,8 @@ export default function CreateListing({ user }) {
                   label="Course name"
                   maxLength={80}
                   fullWidth
-                  value={fields.courseName}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={courseName}
+                  onChange={(e) => setCourseName(e.target.value)}
                   inputProps={{ maxLength: 100 }}
                 />
               </Grid>
@@ -175,8 +183,8 @@ export default function CreateListing({ user }) {
                   multiline={true}
                   maxLength={150}
                   fullWidth
-                  value={fields.briefDescription}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={briefDescription}
+                  onChange={(e) => setBriefDescription(e.target.value)}
                   inputProps={{ maxLength: 200 }}
                 />
               </Grid>
@@ -188,8 +196,8 @@ export default function CreateListing({ user }) {
                   label="Full Course Description"
                   fullWidth
                   multiline={true}
-                  value={fields.longDescription}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={longDescription}
+                  onChange={(e) => setLongDescription(e.target.value)}
                   inputProps={{ maxLength: 1000 }}
                 />
               </Grid>
@@ -201,8 +209,8 @@ export default function CreateListing({ user }) {
                   multiline={true}
                   maxLength={200}
                   fullWidth
-                  value={fields.requirements}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={requirements}
+                  onChange={(e) => setRequirements(e.target.value)}
                   inputProps={{ maxLength: 200 }}
                 />
               </Grid>
@@ -213,8 +221,8 @@ export default function CreateListing({ user }) {
                   label="Course Price (optional)"
                   type="number"
                   fullWidth
-                  value={fields.price}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -224,8 +232,8 @@ export default function CreateListing({ user }) {
                   label="Total length of course (hours) (optional)"
                   type="number"
                   fullWidth
-                  value={fields.totalHours}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={totalHours}
+                  onChange={(e) => setTotalHours(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -235,8 +243,8 @@ export default function CreateListing({ user }) {
                   label="Total length of course (days) (optional)"
                   type="number"
                   fullWidth
-                  value={fields.totalDays}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={totalDays}
+                  onChange={(e) => setTotalDays(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -245,8 +253,8 @@ export default function CreateListing({ user }) {
                   name="courseLink"
                   label="Course Link (optional)"
                   fullWidth
-                  value={fields.courseLink}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={courseLink}
+                  onChange={(e) => setCourseLink(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -255,8 +263,8 @@ export default function CreateListing({ user }) {
                   name="courseImageUrl"
                   label="Course Image Url (optional)"
                   fullWidth
-                  value={fields.courseImageUrl}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={courseImageUrl}
+                  onChange={(e) => setCourseImageUrl(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -266,8 +274,10 @@ export default function CreateListing({ user }) {
                   label="Sample lecture youtube URL (optional)"
                   fullWidth
                   multiline={true}
-                  value={fields.sampleYoutubeLectureVideoUrl}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={sampleYoutubeLectureVideoUrl}
+                  onChange={(e) =>
+                    setSampleYoutubeLectureVideoUrl(e.target.value)
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -276,8 +286,8 @@ export default function CreateListing({ user }) {
                   name="teacherName"
                   label="Teacher name (optional)"
                   fullWidth
-                  value={fields.teacherName}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={teacherName}
+                  onChange={(e) => setTeacherName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -286,8 +296,8 @@ export default function CreateListing({ user }) {
                   name="teacherPic"
                   label="Teacher picture Url (optional)"
                   fullWidth
-                  value={fields.teacherPic}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={teacherPic}
+                  onChange={(e) => setTeacherPic(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -296,8 +306,8 @@ export default function CreateListing({ user }) {
                   name="teacherBio"
                   label="Teacher bio (optional)"
                   fullWidth
-                  value={fields.teacherBio}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={teacherBio}
+                  onChange={(e) => setTeacherBio(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -306,8 +316,8 @@ export default function CreateListing({ user }) {
                   name="companyName"
                   label="Company name (optional)"
                   fullWidth
-                  value={fields.companyName}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -316,8 +326,8 @@ export default function CreateListing({ user }) {
                   name="contactEmail"
                   label="Company contact email (optional)"
                   fullWidth
-                  value={fields.contactEmail}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={contactEmail}
+                  onChange={(e) => setCompanyEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -327,8 +337,8 @@ export default function CreateListing({ user }) {
                   label="Company contact phone (optional)"
                   type="number"
                   fullWidth
-                  value={fields.contactPhone}
-                  onChange={(e) => handleChangeInput(e)}
+                  value={contactPhone}
+                  onChange={(e) => setContactPhone(e.target.value)}
                 />
               </Grid>
             </Grid>
