@@ -20,6 +20,7 @@ const defaultValues = [
     companyName: "",
     courseName: "",
     briefDescription: "",
+    requirements: "",
     price: "",
     courseImageUrl: "",
     longDescription: "",
@@ -114,6 +115,7 @@ export default function CreateListing({ user }) {
       companyName: fields[0].companyName,
       courseName: fields[0].courseName,
       briefDescription: fields[0].briefDescription,
+      requirements: fields[0].requirements,
       price: fields[0].price,
       courseImageUrl: fields[0].courseImageUrl,
       longDescription: fields[0].longDescription,
@@ -180,9 +182,22 @@ export default function CreateListing({ user }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  id="requirements"
+                  name="requirements"
+                  label="Requirements (optional)"
+                  multiline={true}
+                  maxLength={200}
+                  fullWidth
+                  value={fields.requirements}
+                  onChange={(e) => handleChangeInput(e)}
+                  inputProps={{ maxLength: 200 }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   id="price"
                   name="price"
-                  label="Course Price"
+                  label="Course Price (optional)"
                   type="number"
                   fullWidth
                   value={fields.price}
@@ -193,7 +208,7 @@ export default function CreateListing({ user }) {
                 <TextField
                   id="totalHours"
                   name="totalHours"
-                  label="Total length of course (hours)"
+                  label="Total length of course (hours) (optional)"
                   type="number"
                   fullWidth
                   value={fields.totalHours}
@@ -204,7 +219,7 @@ export default function CreateListing({ user }) {
                 <TextField
                   id="totalDays"
                   name="totalDays"
-                  label="Total length of course (days)"
+                  label="Total length of course (days) (optional)"
                   type="number"
                   fullWidth
                   value={fields.totalDays}
