@@ -182,6 +182,19 @@ export default function CreateListing({ user }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  required
+                  id="longDescription"
+                  name="longDescription"
+                  label="Full Course Description"
+                  fullWidth
+                  multiline={true}
+                  value={fields.longDescription}
+                  onChange={(e) => handleChangeInput(e)}
+                  inputProps={{ maxLength: 1000 }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   id="requirements"
                   name="requirements"
                   label="Requirements (optional)"
@@ -204,7 +217,7 @@ export default function CreateListing({ user }) {
                   onChange={(e) => handleChangeInput(e)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   id="totalHours"
                   name="totalHours"
@@ -215,7 +228,7 @@ export default function CreateListing({ user }) {
                   onChange={(e) => handleChangeInput(e)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   id="totalDays"
                   name="totalDays"
@@ -244,19 +257,6 @@ export default function CreateListing({ user }) {
                   fullWidth
                   value={fields.courseImageUrl}
                   onChange={(e) => handleChangeInput(e)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  id="longDescription"
-                  name="longDescription"
-                  label="Full Course Description"
-                  fullWidth
-                  multiline={true}
-                  value={fields.longDescription}
-                  onChange={(e) => handleChangeInput(e)}
-                  inputProps={{ maxLength: 1000 }}
                 />
               </Grid>
               <Grid item xs={12}>
