@@ -325,7 +325,6 @@ export default function CreateListing({ user }) {
                   id="contactPhone"
                   name="contactPhone"
                   label="Company contact phone (optional)"
-                  type="number"
                   fullWidth
                   value={fields.contactPhone}
                   onChange={(e) => handleChangeInput(e)}

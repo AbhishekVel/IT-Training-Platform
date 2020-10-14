@@ -35,6 +35,8 @@ export default function ListingPageButtomSection({ data }) {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const classes = useStyles(isTabletOrMobile)();
 
+  console.log(data.requirements);
+
   const hasSyllabus = data.syllabus && data.syllabus.length > 0;
 
   const firstColumnSyllabus = (syllabus) =>
@@ -120,6 +122,7 @@ const useStyles = (onPhone) =>
       fontSize: onPhone ? ".8rem" : "1.1rem",
       color: "#444053",
       fontFamily: "Palantino",
+      whiteSpace: "pre-line",
     },
     aboutTeacher: {
       width: "100%",
@@ -145,6 +148,7 @@ const useStyles = (onPhone) =>
       alignItems: "center",
       flexDirection: "column",
       padding: theme.spacing(2, 2, 2, 2),
+      whiteSpace: "pre-line",
     },
     courseRequirementsTitle: {
       color: "#5A556E",
@@ -157,6 +161,7 @@ const useStyles = (onPhone) =>
       fontSize: onPhone ? ".8rem" : "1.1rem",
       color: "#444053",
       fontFamily: "Palantino",
+      whiteSpace: "pre-line",
     },
     courseOverviewTitle: {
       color: "#5A556E",
@@ -169,6 +174,7 @@ const useStyles = (onPhone) =>
       fontSize: onPhone ? ".8rem" : "1.1rem",
       color: "#444053",
       fontFamily: "Palantino",
+      whiteSpace: "pre-line",
     },
     whatYoullLearnText: {
       marginTop: "3%",
