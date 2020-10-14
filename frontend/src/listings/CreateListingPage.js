@@ -177,11 +177,11 @@ export default function CreateListing({ user }) {
                   name="briefDescription"
                   label="Brief Course Overview"
                   multiline={true}
-                  maxLength={150}
+                  maxLength={250}
                   fullWidth
                   value={fields.briefDescription}
                   onChange={(e) => handleChangeInput(e)}
-                  inputProps={{ maxLength: 200 }}
+                  inputProps={{ maxLength: 250 }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -194,7 +194,7 @@ export default function CreateListing({ user }) {
                   multiline={true}
                   value={fields.longDescription}
                   onChange={(e) => handleChangeInput(e)}
-                  inputProps={{ maxLength: 1000 }}
+                  inputProps={{ maxLength: 1500 }}
                 />
               </Grid>
               <Grid item xs={12}>
