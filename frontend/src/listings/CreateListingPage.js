@@ -142,8 +142,7 @@ export default function CreateListing({ user }) {
     setTeacherBio("");
     setSampleYoutubeLectureVideoUrl("");
     setRepeatedFields(defaultRepeatedValues);
-    console.log(objToSendToBackend);
-    // user.functions.insertListing(objToSendToBackend);
+    user.functions.insertListing(objToSendToBackend);
 
     //clear input
     e.target.reset();
