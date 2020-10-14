@@ -38,6 +38,7 @@ export default function ListingPage({ user }) {
     }
 
     fetchDataForCourse();
+    window.scrollTo(0, 0);
   }, []);
 
   if (loading) {
