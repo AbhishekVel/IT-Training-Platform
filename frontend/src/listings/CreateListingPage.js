@@ -72,6 +72,10 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     marginTop: "15px",
   },
+  syllabusFields: {
+    marginTop: "20px",
+    marginBottom: "10px",
+  },
 }));
 
 export default function CreateListing({ user }) {
@@ -331,9 +335,9 @@ export default function CreateListing({ user }) {
                 />
               </Grid>
             </Grid>
-            {repeatedFields.map((field, idx) => {
-              return (
-                <Grid>
+            <div className={classes.syllabusFields}>
+              {repeatedFields.map((field, idx) => {
+                return (
                   <Grid>
                     <Grid item xs={12} key={`${field}-${idx}`}>
                       <TextField
@@ -349,31 +353,31 @@ export default function CreateListing({ user }) {
                         inputProps={{ maxLength: 100 }}
                       />
                     </Grid>
-                  </Grid>
-                  <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="flex-end"
-                  >
-                    <Button
-                      className={classes.addRemoveButton}
-                      onClick={() => handleAddInputRepeatedFields()}
-                      startIcon={<AddBoxIcon />}
+                    <Grid
+                      container
+                      direction="row"
+                      justify="flex-start"
+                      alignItems="flex-end"
                     >
-                      Add course topic
-                    </Button>
-                    <Button
-                      className={classes.addRemoveButton}
-                      startIcon={<DeleteForeverIcon />}
-                      onClick={() => handleRemoveInputRepeatedFields(idx)}
-                    >
-                      delete course topic
-                    </Button>
+                      <Button
+                        className={classes.addRemoveButton}
+                        onClick={() => handleAddInputRepeatedFields()}
+                        startIcon={<AddBoxIcon />}
+                      >
+                        Add course topic
+                      </Button>
+                      <Button
+                        className={classes.addRemoveButton}
+                        startIcon={<DeleteForeverIcon />}
+                        onClick={() => handleRemoveInputRepeatedFields(idx)}
+                      >
+                        delete course topic
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-              );
-            })}
+                );
+              })}
+            </div>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Button
