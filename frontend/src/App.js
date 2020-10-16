@@ -107,6 +107,14 @@ export default function App() {
                 />
               </Link>
               <Typography variant="h6" className={classes.title}></Typography>
+              {!isTabletOrMobile && (
+                <Link
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  to="/createlisting"
+                >
+                  <Button color="inherit">Create Listing</Button>
+                </Link>
+              )}
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/about"
