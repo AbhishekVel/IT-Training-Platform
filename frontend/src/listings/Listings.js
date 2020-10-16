@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
+import { useMediaQuery } from "react-responsive";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import Listing from "./Listing";
@@ -11,7 +12,8 @@ import SearchIcon from "@material-ui/icons/Search";
 const MAX_LISTINGS_PER_PAGE = 10;
 
 export default function Listings({ user }) {
-  const classes = useStyles();
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const classes = useStyles(isTabletOrMobile)();
 
   const [coursesDataPaginated, setCoursesDataPaginated] = useState([]);
   const [currentPage, setCurrentPage] = useState([1]);
@@ -95,36 +97,38 @@ export default function Listings({ user }) {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#F6F8FC",
-    borderRadius: "35px",
-    paddingBottom: "10px",
-    width: "90%",
-  },
-  searchBar: {
-    display: "flex",
-    flexDirection: "row",
-    margin: theme.spacing(3, 2, 2, 2),
-  },
-  searchField: {
-    padding: "2px 4px",
-    display: "flex",
-    width: 400,
-    alignItems: "center",
-    paddingRight: "10px",
-  },
-  input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
-    height: "50px",
-  },
-  pagination: {
-    alignSelf: "center",
-  },
-}));
+const useStyles = (onPhone) =>
+  makeStyles((theme) => ({
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: "#F6F8FC",
+      borderRadius: "35px",
+      paddingBottom: "10px",
+      width: "90%",
+    },
+    searchBar: {
+      display: "flex",
+      flexDirection: "row",
+      margin: theme.spacing(3, 2, 2, 2),
+    },
+    searchField: {
+      padding: "2px 4px",
+      display: "flex",
+      width: 400,
+      alignItems: "center",
+      paddingRight: "10px",
+    },
+    input: {
+      marginLeft: theme.spacing(1),
+      flex: 1,
+      height: "50px",
+      fontSize: onPhone ? ".9rem" : "1.1rem",
+    },
+    pagination: {
+      alignSelf: "center",
+    },
+  }));
 
 const fakeListingObject = [
   {
