@@ -121,7 +121,7 @@ export default function Album() {
                     <Typography className={classes.personDescription}>
                       After graduating from the University of Maryland, Abhishek
                       started working at Samsara as a software engineer. He
-                      previously interned as an engineer at Microsoft, Facebook,
+                      previously worked as an engineer at Microsoft, Facebook,
                       and J.P. Morgan.
                     </Typography>
                   </CardContent>
@@ -160,7 +160,7 @@ export default function Album() {
                     <Typography className={classes.personDescription}>
                       After graduating from the University of Maryland, Javed
                       started working at Salesforce as a software engineer. He
-                      previously interned as an engineer at Salesforce, and J.P.
+                      previously worked as an engineer at Salesforce, and J.P.
                       Morgan.
                     </Typography>
                   </CardContent>
@@ -200,7 +200,7 @@ export default function Album() {
                     <Typography className={classes.personDescription}>
                       After graduating from the University of Maryland, Puneeth
                       started working at MongoDB as a software engineer. He
-                      previously interned as an engineer at MongoDB, and J.P.
+                      previously worked as an engineer at MongoDB, and J.P.
                       Morgan.
                     </Typography>
                   </CardContent>
